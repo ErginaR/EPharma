@@ -1,7 +1,7 @@
 <?php 
 
     $active='Home';
-    include("includes/header.php");
+    include("teperbashketa/header.php");
 
 ?>      
        
@@ -107,7 +107,7 @@
                            
                        </div>
                        
-                       <h3><a href="#">Easy Payment</a></h3>
+                       <h3><a href="#">Lehtesi ne pagese</a></h3>
                        
                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </p>
                        
@@ -125,7 +125,7 @@
                            
                        </div>
                        
-                       <h3><a href="#">Discounts</a></h3>
+                       <h3><a href="#">Oferta</a></h3>
                        
                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
                        
@@ -143,7 +143,7 @@
                            
                        </div>
                        
-                       <h3><a href="#"> 100% Satisfaction</a></h3>
+                       <h3><a href="#"> 100% Besim dhe Siguri</a></h3>
                        
                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
                        
@@ -166,7 +166,7 @@
                <div class="col-md-12">
                    
                    <h2>
-                       Popular Medications
+                       Medikamente
                    </h2>
                    
                </div>
@@ -193,7 +193,7 @@
    
    <?php 
     
-    include("includes/footer.php");
+    include("teperbashketa/footer.php");
     
     ?>
     
