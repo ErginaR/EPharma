@@ -1,31 +1,17 @@
 <?php 
 
-    $active='Account';
-    include("includes/header.php");
+    include("teperbashketa/fillimi.php");
 
 ?>    
-      
-   
+       
    <div id="content">
        <div class="container">
-            <div class="col-md-12">
-               
-               <ul class="breadcrumb">
-                   <li>
-                       <a href="index.php">Kryefaqe</a>
-                   </li>
-                   <li>
-                       Rregjistrohu
-                   </li>
-               </ul>
-               
-           </div>
            
            <div class="col-md-3">
    
    <?php 
     
-    include("includes/sidebar.php");
+    include("teperbashketa/pjesa_anesore.php");
     
     ?>
                
@@ -36,75 +22,55 @@
                <div class="box">
                    
                    <div class="box-header">
-                       
-                       <center>
-                           
-                           <h2> Rregjistrohu </h2>
-                           
-                       </center>
-                       
-                       <form action="customer_register.php" method="post" enctype="multipart/form-data">
+                       <h2> Rregjistrohu </h2>
+                      
+                       <form action="rregjistrim.php" method="post" enctype="multipart/form-data" >
                            
                            <div class="form-group">
                                
-                               <label>Emri</label>
+                               <label>Emri<input type="text" class="form-control" name="emri" required></label>
+                         
+                           </div>
+                           <div class="form-group">
                                
-                               <input type="text" class="form-control" name="c_name" required>
+                               <label>Mbiemri<input type="text" class="form-control" name="mbiemri" required></label>
+                         
+                           </div>
+                           <div class="form-group">
                                
+                               <label>Email<input type="text" class="form-control" name="email" required></label>
+                          
                            </div>
                            
                            <div class="form-group">
                                
-                               <label>Email</label>
-                               
-                               <input type="text" class="form-control" name="c_email" required>
-                               
+                               <label>Fjalekalimi<input type="password" class="form-control" name="fjalekalim" required></label>
+                             
                            </div>
-                           
                            <div class="form-group">
                                
-                               <label>Fjalekalimi</label>
-                               
-                               <input type="password" class="form-control" name="c_pass" required>
-                               
+                               <label>Adresa<input type="text" class="form-control" name="adrese" required></label>
+                             
                            </div>
-                           
-                           
                            <div class="form-group">
                                
-                               <label>Qyteti</label>
-                               
-                               <input type="text" class="form-control" name="c_city" required>
-                               
+                               <label>Qyteti<input type="text" class="form-control" name="qytet" required></label>
+                              
                            </div>
-                           
                            <div class="form-group">
                                
-                               <label>Numri i cel </label>
-                               
-                               <input type="text" class="form-control" name="c_contact" required>
-                               
+                               <label>Shteti<input type="text" class="form-control" name="shtet" required></label>
+                              
                            </div>
-                           
-                           <div class="form-group">
+						   <div class="form-group">
                                
-                               <label>Adresa</label>
-                               
-                               <input type="text" class="form-control" name="c_address" required>
-                               
-                           </div>
-                           
-                           <div class="form-group">
-                               
-                               <label>Foto profili</label>
-                               
-                               <input type="file" class="form-control form-height-custom" name="c_image" required>
-                               
+                               <label>Kodi postar<input type="text" class="form-control" name="k_postar" required></label>
+                              
                            </div>
                            
                            <div class="text-center">
                                
-                               <button type="submit" name="register" class="btn btn-primary">
+                               <button type="submit" name="rregjistrim" class="btn btn-primary">
                                
                                <i class="fa fa-user-md"></i>Rregjistrohu
                                
@@ -125,7 +91,7 @@
    
    <?php 
     
-    include("includes/footer.php");
+    include("teperbashketa/fundi.php");
     
     ?>
     
@@ -135,3 +101,40 @@
     
 </body>
 </html>
+<?php 
+
+if(isset($_POST['rregjistrim'])){
+    
+    $emri = $_POST['emri'];
+	
+    $mbiemri = $_POST['mbiemri'];
+	
+    $emaili = $_POST['email'];
+    
+    $fjalekalimi = $_POST['fjalekalim'];
+    
+	$adresa = $_POST['adrese'];
+	
+    $qyteti = $_POST['qytet'];
+    
+    $shteti = $_POST['shtet'];
+    
+    $kodi_p = $_POST['k_postar'];
+    
+    $shto_klient = "insert into farmaciste (Emri,Mbiemri,Email,Fjalekalimi,Adresa,Qyteti,Shteti,Kodi_postar) values ('$emri','$mbiemri','$emaili','$fjalekalimi','$adresa','$qyteti','$shteti','$kodi_p')";
+    
+    $rezultati = mysqli_query($lidhja,$shto_klient);
+    
+    if($rezultati){
+        
+        $_SESSION['email']=$email;
+        
+        echo "<script>alert('Sapo u rregjistruat me sukses')</script>";
+        
+        echo "<script>window.open('index.php','_self')</script>";
+        
+    }
+    
+}
+
+?>

@@ -1,198 +1,116 @@
 <?php 
 
-    $active='Cart';
-    include("includes/header.php");
-
+    include("teperbashketa/fillimi.php");
 ?>
-   
-   <div id="content">
-       <div class="container">
-           <div class="col-md-12">
-               
-               <ul class="breadcrumb">
-                   <li>
-                       <a href="index.php">Kryefaqe</a>
-                   </li>
-                   <li>
-                       Produkte
-                   </li>
-                   
-                   <li>
-                       <a href="product.php?p_cat=<?php echo $p_cat_id; ?>"><?php echo $p_cat_title; ?></a>
-                   </li>
-                   <li> <?php echo $pro_title?> </li>
-               </ul>
-               
-           </div>
-           
-           <div class="col-md-3">
-   
-   <?php 
     
-    include("includes/sidebar.php");
-    
-    ?>
-               
-           </div>
-           
-           <div class="col-md-9">
-               <div id="productMain" class="row">
-                   <div class="col-sm-6">
-                       <div id="mainImage">
-                           <div id="myCarousel" class="carousel slide" data-ride="carousel">
-                               <ol class="carousel-indicators">
-                                   <li data-target="#myCarousel" data-slide-to="0" class="active" ></li>
-                                   <li data-target="#myCarousel" data-slide-to="1"></li>
-                                   <li data-target="#myCarousel" data-slide-to="2"></li>
-                               </ol>
-                               
-                               <div class="carousel-inner">
-                                   <div class="item active">
-                                       <center><img class="img-responsive" src="admin_area/product_images/<?php echo $pro_img1; ?>" alt="produkti 1.1"></center>
-                                   </div>
-                                   <div class="item">
-                                       <center><img class="img-responsive" src="admin_area/product_images/<?php echo $pro_img2; ?>" alt="produkti 1.2"></center>
-                                   </div>
-                                   <div class="item">
-                                       <center><img class="img-responsive" src="admin_area/product_images/<?php echo $pro_img3; ?>" alt="produkti 1.3"></center>
-                                   </div>
-                               </div>
-                               
-                               <a href="#myCarousel" class="left carousel-control" data-slide="prev">
-                                   <span class="glyphicon glyphicon-chevron-left"></span>
-                                   <span class="sr-only">Previous</span>
-                               </a>
-                               
-                               <a href="#myCarousel" class="right carousel-control" data-slide="next">
-                                   <span class="glyphicon glyphicon-chevron-right"></span>
-                                   <span class="sr-only">Next</span>
-                               </a>
-                               
-                           </div>
-                       </div>
-                   </div>
-                   
-                   <div class="col-sm-6">
-                       <div class="box">
-                           <h1 class="text-center"> <?php echo $pro_title; ?> </h1>
-                           
-                           <?php add_cart(); ?>
-                           
-                           <form action="details.php?add_cart=<?php echo $product_id; ?>" class="form-horizontal" method="post">
-                               <div class="form-group">
-                                   <label for="" class="col-md-5 control-label">Sasia</label>
+    <div id="content">
+       <div class="container">                   
+    <?php
+	
+	   
+	if(isset($_GET['pro_id'])){							  
+	$id= $_GET['pro_id'];							    
+	$barna = "select * from barna where Nr_seri=$id ";
+									$r=mysqli_query($lidhja,$barna);
+									$rez=mysqli_fetch_array($r);
+                                    $pro_title = $rez['Emri_b'];
+
+                                    $pershkrim = $rez['Pershkrim'];
+
+                                     $pro_img1 = $rez['Foto_b'];
+                                     $cmimi = $rez['Cmimi'];
+								  
+								  ?>
+                              
+                               <div class="clas1">
+                                 <img class="img-responsive" src="menaxher/foto/<?php echo $pro_img1; ?>" alt="produkti 1.1">
                                    
-                                   <div class="col-md-7">
-                                          <select name="product_qty" id="" class="form-control">
+								</div> 
+                                <div class="clas2">
+ 								   <h4> <?php echo $pro_title; ?> </h4>							
+                                   <h5>Pershkrim<p><?php echo $pershkrim; ?> </p></h5>
+                                     
+								   <?php } ?>
+                           <form action="ruaj.php?add_cart=<?php echo $id; ?>"  method="post">
+                               <div class="form-group">
+                                   
+                                   
+                                   <div class="col-md-3">
+								   <label>Sasia
+                                          <select name="sasia" id="" class="form-control">
                                            <option>1</option>
                                            <option>2</option>
                                            <option>3</option>
                                            <option>4</option>
                                            <option>5</option>
                                            </select>
-                                   
+                                   </label>
                                     </div>
                                    
                                </div>
                                
+                               <p><b>Cmimi<b> $ <?php echo $cmimi; ?></p>
                                
-                               <p class="price">$ <?php echo $pro_price; ?></p>
-                               
-                               <p class="text-center buttons"><button class="btn btn-primary i fa fa-shopping-cart"> Shto ne karte</button></p>
+                               <p><button class="btn btn-primary"> Shto ne shporte</button></p>
                                
                            </form>
                            
-                       </div>
-                       
-                       <div class="row" id="thumbs">
-                           
-                           <div class="col-xs-4">
-                               <a data-target="#myCarousel" data-slide-to="0"  href="#" class="thumb">
-                                   <img src="admin_area/product_images/<?php echo $pro_img1; ?>" alt="product 1" class="img-responsive">
-                               </a>
-                           </div>
-                           
-                           <div class="col-xs-4">
-                               <a data-target="#myCarousel" data-slide-to="1"  href="#" class="thumb">
-                                   <img src="admin_area/product_images/<?php echo $pro_img2; ?>" alt="product 2" class="img-responsive">
-                               </a>
-                           </div>
-                           
-                           <div class="col-xs-4">
-                               <a data-target="#myCarousel" data-slide-to="2"  href="#" class="thumb">
-                                   <img src="admin_area/product_images/<?php echo $pro_img3; ?>" alt="product 4" class="img-responsive">
-                               </a>
-                           </div>
-                           
-                       </div>
-                       
-                   </div>
-                   
-                   
-               </div>
+                             </div>
                
-               <div class="box" id="details">
-                       
-                       <h4>Pershkrim</h4>
-                   
-                   <p>
-                       
-                       <?php echo $pro_desc; ?>
-                       
-                   </p>
-                   
-                       
-                   
-               </div>
-               
-               <div id="row same-heigh-row">
-                   <div class="col-md-3 col-sm-6">
-                       <div class="box same-height headline">
-                           <h3 class="text-center">Sugjerime</h3>
-                       </div>
-                   </div>
+               <br>
+			   <br>
+			   <br>
+               <div>
+                   <div class="col-sm-9">
+				   <div class="col-md-6">
+                           <h3 >Sugjerime</h3>
+                      
                    
                    <?php 
                    
-                    $get_products = "select * from products order by rand() LIMIT 0,3";
-                   
-                    $run_products = mysqli_query($con,$get_products);
-                   
-                   while($row_products=mysqli_fetch_array($run_products)){
-                       
-                       $pro_id = $row_products['product_id'];
-                       
-                       $pro_title = $row_products['product_title'];
-                       
-                       $pro_img1 = $row_products['product_img1'];
-                       
-                       $pro_price = $row_products['product_price'];
-                       
-                       echo "
-                       
-                        <div class='col-md-3 col-sm-6 center-responsive'>
-                        
-                            <div class='product same-height'>
-                            
-                                <a href='details.php?pro_id=$pro_id'>
+                    $get_products = "select * from barna LIMIT 2";
+                             
+                            $run_products = mysqli_query($lidhja,$get_products);
+                             
+                            while($row_products=mysqli_fetch_array($run_products)){
                                 
-                                    <img class='img-responsive' src='admin_area/product_images/$pro_img1'>
+                                $pro_id = $row_products['Nr_seri'];
+        
+                                $pro_title = $row_products['Emri_b'];
+
+                                $pershkrim = $row_products['Pershkrim'];
+
+                                $pro_img1 = $row_products['Foto_b'];
+                                $cmimi = $row_products['Cmimi'];
+                                echo "
                                 
-                                </a>
-                                
-                                <div class='text'>
-                                
-                                    <h3> <a href='details.php?pro_id=$pro_id'> $pro_title </a> </h3>
+                                    <div class='col-md-6 col-sm-6 center-responsive'>
                                     
-                                    <p class='price'> $ $pro_price </p>
+                                        <div class='product'>
+                                        
+                                            <a href='informacione.php?pro_id=$pro_id'>
+                                            
+                                                <img class='img-responsive' src='menaxher/foto/$pro_img1'>
+                                            
+                                            </a>
+                                            
+                                            <div class='text'>
+                                            
+                                                <h3>
+                                                
+                                                    <a href='informacione.php?pro_id=$pro_id'> $pro_title </a>
+                                                
+                                                </h3>
+                                            
+                                                
+                                            
+                                            </div>
+                                        
+                                        </div>
+                                    
+                                    </div>
                                 
-                                </div>
-                            
-                            </div>
-                        
-                        </div>
-                       
-                       ";
+                                ";
                        
                    }
                    
@@ -201,14 +119,13 @@
                </div>
                
            </div>
-           
-       </div>
+    </div>
    </div>
-   
+   </div>
    <?php 
     
-    include("includes/footer.php");
-    
+    include("teperbashketa/fundi.php");
+								  
     ?>
     
     

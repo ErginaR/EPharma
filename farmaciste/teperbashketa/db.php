@@ -1,5 +1,5 @@
 <?php 
 
-$con = mysqli_connect("localhost","root","","epharma");
+$lidhja = mysqli_connect("localhost","root","","depo_farma");
 
 ?>

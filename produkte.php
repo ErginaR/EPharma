@@ -1,56 +1,40 @@
 <?php 
 
-    $active='Produkte';
-    include("teperbashketa/header.php");
+    include("teperbashketa/fillimi.php");
 
 ?>    
       
    <div id="content">
        <div class="container">
 	   
-             <div class="col-md-12">
-               
-               <ul class="breadcrumb">
-                   <li>
-                       <a href="index.php">Kryefaqe</a>
-                   </li>
-                   <li>
-                       Produkte
-                   </li>
-               </ul>
-               
-           </div>
            <div class="col-md-3">
    
    <?php 
     
-    include("teperbashketa/sidebar.php");
+    include("teperbashketa/pjesa_anesore.php");
     
     ?>
                
            </div>
            
-           <div class="col-md-9"><!-- col-md-9 Begin -->
+           <div class="col-md-9">
              
              <?php 
                
-                if(!isset($_GET['p_cat'])){
-                    
-                    if(!isset($_GET['cat'])){
-              
+                if(!isset($_GET['kat'])){
+             
                       echo "
 
-                       <div class='box'><!-- box Begin -->
+                       <div class='box'>
                            <h1>Produkte</h1>
                            <p>
                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo deleniti accusamus, consequuntur illum quasi ut. Voluptate a, ipsam repellendus ut fugiat minima? Id facilis itaque autem, officiis veritatis perferendis, quaerat!
                            </p>
-                       </div><!-- box Finish -->
+                       </div>
 
                        ";
                         
-                    }
-                   
+                  
                    }
                
                ?>
@@ -59,9 +43,9 @@
                
                    <?php 
                    
-                        if(!isset($_GET['p_cat'])){
+                        
                             
-                         if(!isset($_GET['cat'])){
+                         if(!isset($_GET['kat'])){
                             
                             $per_page=6; 
                              
@@ -77,29 +61,29 @@
                             
                             $start_from = ($page-1) * $per_page;
                              
-                            $get_products = "select * from products order by 1 DESC LIMIT $start_from,$per_page";
+                            $get_products = "select * from barna order by 1 DESC LIMIT $start_from,$per_page";
                              
-                            $run_products = mysqli_query($con,$get_products);
+                            $run_products = mysqli_query($lidhja,$get_products);
                              
                             while($row_products=mysqli_fetch_array($run_products)){
                                 
-                                $pro_id = $row_products['product_id'];
+                                $pro_id = $row_products['Nr_seri'];
         
-                                $pro_title = $row_products['product_title'];
+                                $pro_title = $row_products['Emri_b'];
 
-                                $pro_price = $row_products['product_price'];
+                                $pershkrim = $row_products['Pershkrim'];
 
-                                $pro_img1 = $row_products['product_img1'];
-                                
+                                $pro_img1 = $row_products['Foto_b'];
+                                $cmimi = $row_products['Cmimi'];
                                 echo "
                                 
                                     <div class='col-md-4 col-sm-6 center-responsive'>
                                     
                                         <div class='product'>
                                         
-                                            <a href='details.php?pro_id=$pro_id'>
+                                            <a href='informacione.php?pro_id=$pro_id'>
                                             
-                                                <img class='img-responsive' src='admin_area/product_images/$pro_img1'>
+                                                <img class='img-responsive' src='menaxher/foto/$pro_img1'>
                                             
                                             </a>
                                             
@@ -107,27 +91,27 @@
                                             
                                                 <h3>
                                                 
-                                                    <a href='details.php?pro_id=$pro_id'> $pro_title </a>
+                                                    <a href='informacione.php?pro_id=$pro_id'> $pro_title </a>
                                                 
                                                 </h3>
                                             
                                                 <p class='price'>
 
-                                                    $$pro_price
+                                                    $$cmimi
 
                                                 </p>
 
                                                 <p class='buttons'>
 
-                                                    <a class='btn btn-default' href='details.php?pro_id=$pro_id'>
+                                                    <a class='btn btn-default' href='informacione.php?pro_id=$pro_id'>
 
-                                                        View Details
+                                                        Informacion
 
                                                     </a>
 
-                                                    <a class='btn btn-primary' href='details.php?pro_id=$pro_id'>
+                                                    <a class='btn btn-primary' href='informacione.php?pro_id=$pro_id'>
 
-                                                        <i class='fa fa-shopping-cart'></i> Add To Cart
+                                                        <i class='fa fa-shopping-cart'></i> shto ne shporte
 
                                                     </a>
 
@@ -151,9 +135,9 @@
                    <ul class="pagination">
 					 <?php
                              
-                    $query = "select * from products";
+                    $query = "select * from barna";
                              
-                    $result = mysqli_query($con,$query);
+                    $result = mysqli_query($lidhja,$query);
                              
                     $total_records = mysqli_num_rows($result);
                              
@@ -163,7 +147,7 @@
                         
                             <li>
                             
-                                <a href='product.php?page=1'> ".'First Page'." </a>
+                                <a href='produkte.php?page=1'> ".'Faqja e pare'." </a>
                             
                             </li>
                         
@@ -175,7 +159,7 @@
                         
                             <li>
                             
-                                <a href='product.php?page=".$i."'> ".$i." </a>
+                                <a href='produkte.php?page=".$i."'> ".$i." </a>
                             
                             </li>
                         
@@ -187,7 +171,7 @@
                         
                             <li>
                             
-                                <a href='product.php?page=$total_pages'> ".'Last Page'." </a>
+                                <a href='produkte.php?page=$total_pages'> ".'Faqja e fundit'." </a>
                             
                             </li>
                         
@@ -195,7 +179,7 @@
                              
 					    	}
 							
-						}
+						
 					 
 					 ?> 
                        
@@ -204,7 +188,7 @@
                 
                 <?php 
                
-               getpcatpro(); 
+               
                
                getcatpro();
                
@@ -217,7 +201,7 @@
    
    <?php 
     
-    include("teperbashketa/footer.php");
+    include("teperbashketa/fundi.php");
     
     ?>
     

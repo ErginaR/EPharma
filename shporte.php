@@ -1,47 +1,21 @@
+
 <?php 
 
-    $active='Shporta';
-    include("teperbashketa/header.php");
+    include("teperbashketa/fillimi.php");
 
 ?>
-   
    <div id="content">
        <div class="container">
-             <div class="col-md-12">
-               
-               <ul class="breadcrumb">
-                   <li>
-                       <a href="index.php">Kryefaqe</a>
-                   </li>
-                   <li>
-                       Shporta
-                   </li>
-               </ul>
-               
-           </div>
+             
            
            <div id="cart" class="col-md-9">
                
                <div class="box">
                    
-                   <form action="cart.php" method="post" enctype="multipart/form-data">
+                   <form action="shporte.php" method="post" enctype="multipart/form-data">
                        
                        <h1>Shporta</h1>
-                       
-                       <?php 
-                       
-                       $ip_add = getRealIpUser();
-                       
-                       $select_cart = "select * from cart where ip_add='$ip_add'";
-                       
-                       $run_cart = mysqli_query($con,$select_cart);
-                       
-                       $count = mysqli_num_rows($run_cart);
-                       
-                       ?>
-                       
-                       <p class="text-muted"> <?php echo $count; ?> produkte ne shporte</p>
-                       
+					   
                        <div class="table-responsive">
                            
                            <table class="table">
@@ -50,12 +24,11 @@
                                    
                                    <tr>
                                        
-                                       <th colspan="2">Produkte</th>
+                                       <th >Produkte</th>
                                        <th>Sasi</th>
                                        <th>Cmimi</th>
-                                      
-                                       <th colspan="1">Fshi</th>
-                                       <th colspan="2">Totali</th>
+                                       <th >Totali</th>
+                                       <th >Fshi</th>
                                        
                                    </tr>
                                    
@@ -63,97 +36,48 @@
                                
                                <tbody>
                                   
-                                  <?php 
-                                   
-                                   $total = 0;
-                                   
-                                   while($row_cart = mysqli_fetch_array($run_cart)){
-                                       
-                                     $pro_id = $row_cart['p_id'];
-                                       
-                                     
-                                       
-                                     $pro_qty = $row_cart['qty'];
-                                       
-                                       $get_products = "select * from products where product_id='$pro_id'";
-                                       
-                                       $run_products = mysqli_query($con,$get_products);
-                                       
-                                       while($row_products = mysqli_fetch_array($run_products)){
-                                           
-                                           $product_title = $row_products['product_title'];
-                                           
-                                           $product_img1 = $row_products['product_img1'];
-                                           
-                                           $only_price = $row_products['product_price'];
-                                           
-                                           $sub_total = $row_products['product_price']*$pro_qty;
-                                           
-                                           $total += $sub_total;
-                                           
-                                   ?>
-                                   
-                                   <tr>
-                                       
-                                       <td>
-                                           
-                                           <img class="img-responsive" src="menaxher/product_images/<?php echo $product_img1; ?>" alt="Product 3a">
-                                           
-                                       </td>
-                                       
-                                       <td>
-                                           
-                                           <a href="details.php?pro_id=<?php echo $pro_id; ?>"> <?php echo $product_title; ?> </a>
-                                           
-                                       </td>
-                                       
-                                       <td>
-                                          
-                                           <?php echo $pro_qty; ?>
-                                           
-                                       </td>
-                                       
-                                       <td>
-                                           
-                                           <?php echo $only_price; ?>
-                                           
-                                       </td>
-                                       
-                                       
-                                       
-                                       <td>
-                                           
-                                           <input type="checkbox" name="remove[]" value="<?php echo $pro_id; ?>">
-                                           
-                                       </td>
-                                       
-                                       <td>
-                                           
-                                           $<?php echo $sub_total; ?>
-                                           
-                                       </td>
-                                       
-                                   </tr>
-                                   
-                                   <?php } } ?>
-                                   
-                               </tbody>
+                                  <?php $total = 0;
+                         if(!empty($_SESSION["cart"])){
+                           
+                        foreach ($_SESSION["cart"] as $key => $value) {
+							$id=$value['product_id'];
+							$get_products = "select * from barna where Nr_seri='$id' ";
+                             $r=mysqli_query($lidhja,$get_products);          
+                             $rr=mysqli_fetch_array($r); 
+							 $nr=mysqli_num_rows($r);
+                             if($nr==1)	{
+								$emri= $rr['Emri_b'];
+								$cmimi=$rr['Cmimi'];
+                             }								 
+                        ?>
+                        <tr>
+                            <td><?php echo $emri ?></td>
+                            <td><?php echo $value["item_quantity"]; ?></td>
+                            <td>$ <?php echo $cmimi; ?></td>
+                            <td>
+                                $ <?php echo number_format($value["item_quantity"] * $cmimi, 2); ?></td>
+                            <td><input type="checkbox" name="remove[]" value="<?php echo $id; ?>"></td>
+                              
+                        </tr>
+                        <?php
+                        $total = $total + ($value["item_quantity"] * $cmimi);
+                    }
+                        ?>
+                        <tr>
+                            <td colspan="3" align="right">Total</td>
+                            <th align="right">$ <?php echo number_format($total, 2); ?></th>
+                            <td></td>
+                        </tr>
+                        <?php
+                    }
+                ?>
                                
-                               <tfoot>
-                                   
-                                   <tr>
-                                       
-                                       <th colspan="5">Totali</th>
-                                       <th colspan="2">$<?php echo $total; ?></th>
-                                       
-                                   </tr>
-                                   
-                               </tfoot>
+                              
                                
                            </table>
                            
                        </div>
-                       
+                        
                        <div class="box-footer">
                            
                            <div class="pull-left">
@@ -176,7 +100,7 @@
                                
                                <a href="checkout.php" class="btn btn-primary">
                                    
-                                   Proceed Checkout <i class="fa fa-chevron-right"></i>
+                                   Realizo Blerjen <i class="fa fa-chevron-right"></i>
                                    
                                </a>
                                
@@ -191,81 +115,26 @@
                <?php 
                
                 function update_cart(){
-                    
-                    global $con;
-                    
-                    if(isset($_POST['update'])){
+					
+					 if(isset($_POST['update'])){
                         
                         foreach($_POST['remove'] as $remove_id){
+                            foreach ($_SESSION["cart"] as $keys => $value){
+                           if ($value["product_id"] == $remove_id){
+                              unset($_SESSION["cart"][$keys]);
+                             
                             
-                            $delete_product = "delete from cart where p_id='$remove_id'";
-                            
-                            $run_delete = mysqli_query($con,$delete_product);
-                            
-                            if($run_delete){
-                                
-                                echo "<script>window.open('cart.php','_self')</script>";
-                                
-                            }
-                            
-                        }
-                        
-                    }
-                    
+                             }
+                           }
+						echo '<script>alert("Barnat nuk jane me pjese e shportes")</script>';
+                        echo '<script>window.location="shporte.php"</script>';
                 }
-               
-               echo @$up_cart = update_cart();
+               }
+			  }
+               echo $up_cart = update_cart();
                
                ?>
                
-               <div id="row same-heigh-row">
-                   <div class="col-md-3 col-sm-6">
-                       <div class="box same-height headline">
-                           <h3 class="text-center">Sugjerime</h3>
-                       </div>
-                   </div>
-                   
-                   <?php 
-                   
-                   $get_products = "select * from products order by rand() LIMIT 0,3";
-                   
-                   $run_products = mysqli_query($con,$get_products);
-                   
-                   while($row_products=mysqli_fetch_array($run_products)){
-                       
-                       $pro_id = $row_products['product_id'];
-                       
-                       $pro_title = $row_products['product_title'];
-                       
-                       $pro_price = $row_products['product_price'];
-                       
-                       $pro_img1 = $row_products['product_img1'];
-                       
-                       echo "
-                       
-                    <div class='col-md-3 col-sm-6 center-responsive'><!-- col-md-3 col-sm-6 center-responsive Begin -->
-                       <div class='product same-height'><!-- product same-height Begin -->
-                           <a href='details.php?pro_id=$pro_id'>
-                               <img class='img-responsive' src='admin_area/product_images/$pro_img1' alt='Product 6'>
-                            </a>
-                            
-                            <div class='text'><!-- text Begin -->
-                                <h3><a href='details.php?pro_id=$pro_id'> $pro_title </a></h3>
-                                
-                                <p class='price'>$$pro_price</p>
-                                
-                            </div><!-- text Finish -->
-                            
-                        </div><!-- product same-height Finish -->
-                   </div><!-- col-md-3 col-sm-6 center-responsive Finish -->
-                   
-                       ";
-                       
-                   }
-                   
-                   ?>
-                   
-               </div>
                
            </div>
            
@@ -325,15 +194,13 @@
            
        </div>
    </div>
-   
+  
    <?php 
     
-    include("teperbashketa/footer.php");
+    include("teperbashketa/fundi.php");
     
     ?>
-    
-    <script src="js/jquery-331.min.js"></script>
-    <script src="js/bootstrap-337.min.js"></script>
+
     
     
 </body>

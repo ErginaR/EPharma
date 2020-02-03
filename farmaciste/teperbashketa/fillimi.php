@@ -1,33 +1,66 @@
 <?php 
+
 session_start();
-if(!isset($_SESSION['email'])){
-    
-    echo "<script>window.open('../checkout.php','_self')</script>";
-    
-}else{//kllapa mbyllese ne fund te faqes
-include("teperbashketa/db.php");
+require("teperbashketa/db.php");
 include("funksione/fux.php");
+
 ?>
+<?php 
+
+if(isset($_GET['Nr_seri'])){
+    
+    $id = $_GET['Nr_seri'];
+    $q = "select * from barna where Nr_seri='$id' ";
+    
+    $rezultat = mysqli_query($lidhja,$q);
+    
+    $rresht = mysqli_fetch_array($rezultat);
+    
+	$emertimi = $rresht['Emri_b'];
+    
+    $pershkrimi = $rresht['Pershkrim'];
+    
+    $date_p = $rresht['Date_P'];
+    
+    $date_s = $rresht['Date_S'];
+    
+    $foto_p = $rresht['Foto_p'];
+    
+    $vendi= $row_product['Vendi_P'];
+	
+	$Id_kat = $rresht['Id_kat'];
+	
+    $cmim = $rresht['Cmimi'];
+	
+    $q2 = "select * from kategori_barna where Id_kat=$Id_kat' ";
+    
+    $rezultat2 = mysqli_query($lidhja,$q2);
+    
+    $rresht2 = mysqli_fetch_array($rezultat2);
+    
+    $kategori = $rresht2['Kategoria'];
+    
+}
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
     <title>E-Pharma</title>
     <link rel="stylesheet" href="styles/bootstrap-337.min.css">
-   <link rel="stylesheet" href="font-awsome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="styles/stili.css">
+	<link rel="stylesheet" href="styles/stili.css">
 </head>
 <body>
    
    <div id="top">
-        <div> 		
-           
+           <div >
                
                <ul class="menu">
                    
                    <li>
                        <a href="../rregjistrim.php">Rregjistrohu</a>
                    </li>
-                   <li>
+                   <li >
                        <a href="llogaria.php">Llogaria</a>
                    </li>
                    <li>
@@ -53,38 +86,37 @@ include("funksione/fux.php");
                    </a>
 				   </li>
                    <li>
-                       
+                       <a href="../checkout.php">
                        
                         <?php 
                            
                            if(!isset($_SESSION['email'])){
                        
-                                echo "<a href='checkout.php'> Hyr</a>";
+                                echo "<a href='..\checkout.php'> Hyr</a>";
 
                                }else{
 
-                                echo " <a href='dil.php'> Dil </a> ";
+                                echo " <a href='..\dil.php'> Dil </a> ";
 
                                }
                            
                          ?>
                        
-                       
+                       </a>
                    </li>
                    
-               </ul>
+                        </ul>
                
            </div>
            
        </div>
-       
    
-    <div class="navbar "> 
+           
+ <div class="navbar "> 
    <div>         
               <ul class="nav navbar-nav ">
-                       
-					   <li>
-                           <a href="..\index.php"><img src="foto/epharma-logo.png" alt="E-Pharmas Logo" ></a>
+                       <li>
+                           <a href="index.php"><img src="foto/epharma-logo.png" alt="E-Pharmas Logo" ></a>
                        </li>
                         <li>
                            <a href="..\index.php">Kryefaqe</a>
@@ -105,7 +137,7 @@ include("funksione/fux.php");
                        
                    </ul>
                     
-					<form method="get" action="../Kerko.php" class="navbar-form">
+			<form method="get" action="Kerko.php" class="navbar-form">
                        
                        <div style="float:right;">
                            
@@ -116,82 +148,8 @@ include("funksione/fux.php");
                        </div>
                        
                    </form>
+		    
                </div>
-               
-
-               
-           </div>
-           
-       </div>
-       
+            
    </div>
    
-   <div id="content">
-       <div class="container">
-           
-           <div class="col-md-3">
-   
-   <?php 
-    
-    include("teperbashketa/pjesa_anesore.php");
-    
-    ?>
-               
-           </div>
-           
-          <div class="col-md-9">
-               
-               <div class="box">
-                   
-                   <?php
-                   
-                   if (isset($_GET['HitoriaBlerjes'])){
-                       include("HitoriaBlerjes.php");
-                   }
-                   
-                   ?>
-                   
-                   <?php
-                   
-                   if (isset($_GET['modifiko_llogarine'])){
-                       include("modifiko_llogarine.php");
-                   }
-                   
-                   ?>
-                   
-                   <?php
-                   
-                   if (isset($_GET['ndrysho_fjalekalim'])){
-                       include("ndrysho_fjalekalim.php");
-                   }
-                   
-                   ?>
-                   
-                   <?php
-                   
-                   if (isset($_GET['fshi_llogarine'])){
-                       include("fshi_llogarine.php");
-                   }
-                   
-                   ?>
-                   
-               </div>
-               
-           </div>
-           
-       </div>
-   </div>
-   
-   <?php 
-    
-    include("teperbashketa/fundi.php");
-    
-    ?>
-    
-    <script src="js/jquery-331.min.js"></script>
-    <script src="js/bootstrap-337.min.js"></script>
-    
-    
-</body>
-</html>
-<?php } ?>

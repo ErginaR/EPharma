@@ -1,7 +1,6 @@
 <?php 
 
-    $active='Contact';
-    include("includes/header.php");
+    include("teperbashketa/fillimi.php");
 
 ?>  
      
@@ -25,7 +24,7 @@
    
    <?php 
     
-    include("includes/sidebar.php");
+    include("teperbashketa/pjesa_anesore.php");
     
     ?>
                
@@ -100,7 +99,7 @@
    
    <?php 
     
-    include("includes/footer.php");
+    include("teperbashketa/fundi.php");
     
     ?>
     
