@@ -1,40 +1,29 @@
 <div class="box">
     
-  <div style="font-align:center">
-      
       <center>
           
           <h1>Hyr </h1> 
           
       </center>
       
-  </div>
-   
-  <form method="post" action="checkout.php">
+  <form method="post" action="kontrollo.php">
       
-      <div >
+      <div>
           
-          <label> Email</label>
-          
-          <input name="email" type="text" required>
+          <label> Email&nbsp&nbsp&nbsp <input name="email" type="text" required></label>
           
       </div>
-      
+     
        <div>
           
-          <label> Fjalekalimi </label>
-          
-          <input name="flkalim" type="password"  required>
+          <label> Fjalekalimi <input name="flkalim" type="password"  required></label>
           
       </div>
-      <div style="font-align:center">
+	  
+      <div>
           
-          <button name="hyr" value="Login" class="btn btn-primary">
-              
-              <i class="fa fa-sign-in"></i> Hyr
-              
-          </button>
-          
+          <button name="hyr" value="Hyr" class="btn btn-primary"> Hyr</button>
+         
       </div>   
       
   </form>
@@ -67,14 +56,6 @@ if(isset($_POST['hyr'])){
 	
 	$rresht_f=mysqli_fetch_array($realizo);
 	
-    $Id_fr=$rresht_f['id_farmacistit'];
-	
-    $porosia = "select * from porosi where Id_klientit='$Id_fr' ";
-    
-    $realizo_l = mysqli_query($lidhja,$porosia);
-    
-    $nr_rresht_p = mysqli_num_rows($realizo_l);
-    
     if($nr_rreshtave==0){
         
         echo "<script>alert('Te dhenat e futura jane gabim')</script>";
@@ -82,22 +63,13 @@ if(isset($_POST['hyr'])){
         exit();
         
     }
-    
-    if($nr_rreshtave==1 AND $nr_rresht_p=0){
-        
-        $_SESSION['email']=$email;
-        
-       echo "<script>alert('Hyrja me sukses')</script>"; 
-        
-       echo "<script>window.open('farmaciste/llogaria.php?porosia','_self')</script>";
-        
-    }else{
+    else{
         
         $_SESSION['email']=$email;
         
        echo "<script>alert('Hyrja me sukses'</script>"; 
         
-       echo "<script>window.open('checkout.php','_self')</script>";
+       echo "<script>window.open('produkte.php','_self')</script>";
         
     }
     

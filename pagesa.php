@@ -16,7 +16,7 @@
     
     
      <p class="lead text-center">
-         <form action="porosi.php" method="post" >
+         <form action="porosi.php" method="get" >
 		    <h1>Konfirmo adresen</h1>
 		    <div class="form-group">
                            
@@ -25,7 +25,6 @@
                           <input type="text" class="form-control" name="adrese" required>
                            
                        </div>
-		 </form>
 		  <table class="table">
                                
                                <thead>
@@ -44,12 +43,12 @@
                                <tbody>
                                   
                                   <?php 
-                         if(!empty($_SESSION["cart"])){
+                         if(!empty($_SESSION["shporte"])){
                            $total = 0;
-                        foreach ($_SESSION["cart"] as $key => $value) {
-							$id=$value['product_id'];
-							$get_products = "select * from barna where Nr_seri='$id' ";
-                             $r=mysqli_query($lidhja,$get_products);          
+                        foreach ($_SESSION["shporte"] as $celes => $vlere) {
+							$id=$vlere['id'];
+							$barna = "select * from barna where Nr_seri='$id' ";
+                             $r=mysqli_query($lidhja,$barna);          
                              $rr=mysqli_fetch_array($r); 
 							 $nr=mysqli_num_rows($r);
                              if($nr==1)	{
@@ -59,15 +58,12 @@
                         ?>
                         <tr>
                             <td><?php echo $emri ?></td>
-                            <td><?php echo $value["item_quantity"]; ?></td>
+                            <td><?php echo $vlere["sasi"]; ?></td>
                             <td>$ <?php echo $cmimi; ?></td>
-                            <td>
-                                $ <?php echo number_format($value["item_quantity"] * $cmimi, 2); ?></td>
-                            
-
+                            <td>$ <?php echo number_format($vlere["sasi"] * $cmimi, 2); ?></td>                           
                         </tr>
                         <?php
-                        $total = $total + ($value["item_quantity"] * $cmimi);
+                        $total = $total + ($vlere["sasi"] * $cmimi);
                     }
                         ?>
                         <tr>
@@ -82,10 +78,8 @@
                               
                                
                            </table>
-         <a href="porosi.php?total=<?php echo $total ?>"> Realizo pagesen</a>
-         
+         <input type="submit"value="submit"> </input>
+         </form>
      </p>
-      <img class="img-responsive" src="foto/foto4.png" alt="img-paypall">
-     
-    
+      
 </div>

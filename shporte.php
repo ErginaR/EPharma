@@ -5,14 +5,11 @@
 
 ?>
    <div id="content">
-       <div class="container">
-             
-           
-           <div id="cart" class="col-md-9">
-               
+       <div class="container">          
+           <div id="cart" class="col-md-9">               
                <div class="box">
                    
-                   <form action="shporte.php" method="post" enctype="multipart/form-data">
+                   <form action="shporte.php" method="post">
                        
                        <h1>Shporta</h1>
 					   
@@ -36,31 +33,40 @@
                                
                                <tbody>
                                   
-                                  <?php $total = 0;
-                         if(!empty($_SESSION["cart"])){
+                         <?php $total = 0;
+						       $total2 = 0;
+							   $sasi_t=0;
+                        if(!empty($_SESSION["shporte"])){
                            
-                        foreach ($_SESSION["cart"] as $key => $value) {
-							$id=$value['product_id'];
-							$get_products = "select * from barna where Nr_seri='$id' ";
-                             $r=mysqli_query($lidhja,$get_products);          
+                        foreach ($_SESSION["shporte"] as $celes => $vlere) {
+							$id=$vlere['id'];
+							$sasi_t+=$vlere["sasi"];
+							$q1= "select * from barna where Nr_seri='$id' ";
+                             $r=mysqli_query($lidhja,$q1);          
                              $rr=mysqli_fetch_array($r); 
 							 $nr=mysqli_num_rows($r);
                              if($nr==1)	{
 								$emri= $rr['Emri_b'];
 								$cmimi=$rr['Cmimi'];
-                             }								 
-                        ?>
+                              }								 
+                         ?>
                         <tr>
                             <td><?php echo $emri ?></td>
-                            <td><?php echo $value["item_quantity"]; ?></td>
+                            <td><?php echo $vlere["sasi"];?></td>
                             <td>$ <?php echo $cmimi; ?></td>
                             <td>
-                                $ <?php echo number_format($value["item_quantity"] * $cmimi, 2); ?></td>
-                            <td><input type="checkbox" name="remove[]" value="<?php echo $id; ?>"></td>
+                                $ <?php echo number_format($vlere["sasi"] * $cmimi, 2); ?></td>
+                            <td><input type="checkbox" name="fshi[]" value="<?php echo $id; ?>"></td>
                               
                         </tr>
                         <?php
-                        $total = $total + ($value["item_quantity"] * $cmimi);
+                        $total = $total + ($vlere["sasi"] * $cmimi);
+					  if($sasi_t>0){
+						if($sasi_t==1)
+						  $total2=50+$total;
+					    else
+							$total2=50+30*($sasi_t-1)+$total;
+						}	
                     }
                         ?>
                         <tr>
@@ -71,9 +77,7 @@
                         <?php
                     }
                 ?>
-                               
                               
-                               
                            </table>
                            
                        </div>
@@ -82,28 +86,16 @@
                            
                            <div class="pull-left">
                                
-                               <a href="index.php" class="btn btn-default">
-                                   
-                                   <i class="fa fa-chevron-left"></i> Kthehu
-                                   
-                               </a>
+                               <a href="index.php" class="btn btn-default">Kthehu</a>
                                
                            </div>
                            
                            <div class="pull-right">
                                
-                               <button type="submit" name="update" value="Update Cart" class="btn btn-default">
-                                   
-                                   <i class="fa fa-refresh"></i> Perditeso
-                                   
-                               </button>
-                               
-                               <a href="checkout.php" class="btn btn-primary">
-                                   
-                                   Realizo Blerjen <i class="fa fa-chevron-right"></i>
-                                   
-                               </a>
-                               
+                               <button type="submit" name="perditeso" value="Update Cart" class="btn btn-default">Perditeso</button>
+                                 
+                               <a href="kontrollo.php" class="btn btn-primary">Realizo Blerjen</a>
+                             
                            </div>
                            
                        </div>
@@ -114,25 +106,19 @@
                
                <?php 
                
-                function update_cart(){
-					
-					 if(isset($_POST['update'])){
+					 if(isset($_POST['perditeso'])){
                         
-                        foreach($_POST['remove'] as $remove_id){
-                            foreach ($_SESSION["cart"] as $keys => $value){
-                           if ($value["product_id"] == $remove_id){
-                              unset($_SESSION["cart"][$keys]);
-                             
-                            
+                        foreach($_POST['fshi'] as $vlere1){
+                            foreach ($_SESSION["shporte"] as $celes2 => $vlere2){
+                              if ($vlere2["id"] == $vlere1){
+                                unset($_SESSION["shporte"][$celes2]);
                              }
                            }
 						echo '<script>alert("Barnat nuk jane me pjese e shportes")</script>';
                         echo '<script>window.location="shporte.php"</script>';
                 }
                }
-			  }
-               echo $up_cart = update_cart();
-               
+			 
                ?>
                
                
@@ -150,7 +136,7 @@
                    
                    <p class="text-muted">
                        
-                       !!Transporti falas kudo
+                       !!Totali duke perfshire transportin
                        
                    </p>
                    
@@ -170,15 +156,15 @@
                                <tr>
                                    
                                    <td> Transporti</td>
-                                   <td> $0 </td>
+                                   <td> $30-50 </td>
                                    
                                </tr>
                                
                                
                                <tr class="total">
                                    
-                                   <td> Totali </td>
-                                   <th> $<?php echo $total; ?> </th>
+                                   <td> Totali perfundimtar</td>
+                                   <th> $<?php echo $total2; ?> </th>
                                    
                                </tr>
                                
@@ -199,9 +185,6 @@
     
     include("teperbashketa/fundi.php");
     
-    ?>
-
-    
-    
+    ?>    
 </body>
 </html>

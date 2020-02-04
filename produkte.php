@@ -2,8 +2,7 @@
 
     include("teperbashketa/fillimi.php");
 
-?>    
-      
+?>         
    <div id="content">
        <div class="container">
 	   
@@ -47,43 +46,29 @@
                             
                          if(!isset($_GET['kat'])){
                             
-                            $per_page=6; 
+                            $q1 = "select * from barna order by 1 DESC LIMIT 9";
                              
-                            if(isset($_GET['page'])){
-                                
-                                $page = $_GET['page'];
-                                
-                            }else{
-                                
-                                $page=1;
-                                
-                            }
-                            
-                            $start_from = ($page-1) * $per_page;
+                            $realizo = mysqli_query($lidhja,$q1);
                              
-                            $get_products = "select * from barna order by 1 DESC LIMIT $start_from,$per_page";
-                             
-                            $run_products = mysqli_query($lidhja,$get_products);
-                             
-                            while($row_products=mysqli_fetch_array($run_products)){
+                            while($rresht=mysqli_fetch_array($realizo)){
                                 
-                                $pro_id = $row_products['Nr_seri'];
+                                $id = $rresht['Nr_seri'];
         
-                                $pro_title = $row_products['Emri_b'];
+                                $emri = $rresht['Emri_b'];
 
-                                $pershkrim = $row_products['Pershkrim'];
+                                $pershkrim = $rresht['Pershkrim'];
 
-                                $pro_img1 = $row_products['Foto_b'];
-                                $cmimi = $row_products['Cmimi'];
+                                $foto = $rresht['Foto_b'];
+                                $cmimi = $rresht['Cmimi'];
                                 echo "
                                 
                                     <div class='col-md-4 col-sm-6 center-responsive'>
                                     
                                         <div class='product'>
                                         
-                                            <a href='informacione.php?pro_id=$pro_id'>
+                                            <a href='informacione.php?id_b=$id'>
                                             
-                                                <img class='img-responsive' src='menaxher/foto/$pro_img1'>
+                                                <img class='img-responsive' src='menaxher/foto/$foto'>
                                             
                                             </a>
                                             
@@ -91,7 +76,7 @@
                                             
                                                 <h3>
                                                 
-                                                    <a href='informacione.php?pro_id=$pro_id'> $pro_title </a>
+                                                    <a href='informacione.php?id_b=$id'> $emri </a>
                                                 
                                                 </h3>
                                             
@@ -103,15 +88,15 @@
 
                                                 <p class='buttons'>
 
-                                                    <a class='btn btn-default' href='informacione.php?pro_id=$pro_id'>
+                                                    <a class='btn btn-default' href='informacione.php?id_b=$id'>
 
                                                         Informacion
 
                                                     </a>
 
-                                                    <a class='btn btn-primary' href='informacione.php?pro_id=$pro_id'>
+                                                    <a class='btn btn-primary' href='informacione.php?id_b=$id'>
 
-                                                        <i class='fa fa-shopping-cart'></i> shto ne shporte
+                                                         shto ne shporte
 
                                                     </a>
 
@@ -126,76 +111,122 @@
                                 ";
                                 
                         }
-                        
+                      }  
                    ?>
                
                </div>
                
-               <center>
-                   <ul class="pagination">
-					 <?php
-                             
-                    $query = "select * from barna";
-                             
-                    $result = mysqli_query($lidhja,$query);
-                             
-                    $total_records = mysqli_num_rows($result);
-                             
-                    $total_pages = ceil($total_records / $per_page);
-                             
-                        echo "
-                        
-                            <li>
-                            
-                                <a href='produkte.php?page=1'> ".'Faqja e pare'." </a>
-                            
-                            </li>
-                        
-                        ";
-                             
-                        for($i=1; $i<=$total_pages; $i++){
-                            
-                              echo "
-                        
-                            <li>
-                            
-                                <a href='produkte.php?page=".$i."'> ".$i." </a>
-                            
-                            </li>
-                        
-                        ";  
-                            
-                        };
-                             
-                        echo "
-                        
-                            <li>
-                            
-                                <a href='produkte.php?page=$total_pages'> ".'Faqja e fundit'." </a>
-                            
-                            </li>
-                        
-                        ";
-                             
-					    	}
-							
-						
-					 
-					 ?> 
-                       
-                   </ul>
-               </center>
-                
                 <?php 
                
-               
-               
-               getcatpro();
-               
-               ?>  
-               
-           </div>
-           
+                if(isset($_GET['kat'])){
+        
+        $Id_kat = $_GET['kat'];
+        
+        $q2 = "select * from kategori_barna where Id_kat='$Id_kat'";
+        
+        $realizo2= mysqli_query($lidhja,$q2);
+        
+        $rresht2 = mysqli_fetch_array($realizo2);
+        
+        $emri_kat = $rresht2['Kategoria'];
+        
+        $q3 = "select * from barna where Id_kat='$Id_kat' LIMIT 0,6";
+        
+        $realizo3 = mysqli_query($lidhja,$q3);
+        
+        $nr = mysqli_num_rows($realizo3);
+        
+        if($nr==0){
+            
+            
+            echo "
+            
+                <div class='box'>
+                
+                    <h1>Kjo kategori nuk perban asnje artikull</h1>
+                
+                </div>
+            
+            ";
+            
+        }else{
+            
+            echo "
+            
+                <div class='box'>
+                
+                    <h1> $emri_kat</h1>
+                    
+                
+                </div>
+            
+            ";
+            
+        }
+        
+        while($rresht3=mysqli_fetch_array($realizo3)){
+            
+                                $id = $rresht3['Nr_seri'];
+        
+                                $emri = $rresht3['Emri_b'];
+
+                                $pershkrim = $rresht3['Pershkrim'];
+
+                                $foto = $rresht3['Foto_b'];
+								
+                                $cmimi = $rresht3['Cmimi'];
+                                echo "
+                                
+                                    <div class='col-md-4 col-sm-6 center-responsive'>
+                                    
+                                        <div class='product'>
+                                        
+                                            <a href='informacione.php?id_b=$id'>
+                                            
+                                                <img class='img-responsive' src='menaxher/foto/$foto'>
+                                            
+                                            </a>
+                                            
+                                            <div class='text'>
+                                            
+                                                <h3>
+                                                
+                                                    <a href='informacione.php?id_b=$id'> $emri </a>
+                                                
+                                                </h3>
+                                            
+                                                <p class='price'>
+
+                                                    $$cmimi
+
+                                                </p>
+
+                                                <p class='buttons'>
+
+                                                    <a class='btn btn-default' href='informacione.php?id_b=$id'>
+
+                                                        Informacion
+
+                                                    </a>
+
+                                                    <a class='btn btn-primary' href='informacione.php?id_b=$id'>
+                                                         shto ne shporte
+
+                                                    </a>
+
+                                                </p>
+                                            
+                                            </div>
+                                        
+                                        </div>
+                                    
+                                    </div>
+                                
+                                ";
+                             } 
+                         }
+               ?>                
+           </div>          
        </div>
    </div>
    
@@ -204,10 +235,6 @@
     include("teperbashketa/fundi.php");
     
     ?>
-    
-    <script src="js/jquery-331.min.js"></script>
-    <script src="js/bootstrap-337.min.js"></script>
-    
     
 </body>
 </html>

@@ -58,7 +58,23 @@ if(isset($_GET['Nr_seri'])){
                <ul class="menu">
                    
                    <li>
-                       <a href="../rregjistrim.php">Rregjistrohu</a>
+                       
+                       
+                        <?php 
+                           
+                           if(isset($_SESSION['email'])){
+                       
+                                echo "<a href='../index.php'> Kryefaqe</a>";
+
+                               }
+						  else{
+
+                                echo " <a href='../rregjistrim.php'>Rregjistrohu </a> ";
+
+                               }
+                           
+                         ?>
+                       
                    </li>
                    <li >
                        <a href="llogaria.php">Llogaria</a>
@@ -86,13 +102,13 @@ if(isset($_GET['Nr_seri'])){
                    </a>
 				   </li>
                    <li>
-                       <a href="../checkout.php">
+                       <a href="../kontrollo.php">
                        
                         <?php 
                            
                            if(!isset($_SESSION['email'])){
                        
-                                echo "<a href='..\checkout.php'> Hyr</a>";
+                                echo "<a href='..\kontrollo.php'> Hyr</a>";
 
                                }else{
 

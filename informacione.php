@@ -7,37 +7,32 @@
        <div class="container">                   
     <?php
 	
-	   
-	if(isset($_GET['pro_id'])){							  
-	$id= $_GET['pro_id'];							    
-	$barna = "select * from barna where Nr_seri=$id ";
-									$r=mysqli_query($lidhja,$barna);
-									$rez=mysqli_fetch_array($r);
-                                    $pro_title = $rez['Emri_b'];
-
-                                    $pershkrim = $rez['Pershkrim'];
-
-                                     $pro_img1 = $rez['Foto_b'];
-                                     $cmimi = $rez['Cmimi'];
-								  
-								  ?>
+	          if(isset($_GET['id_b'])){							  
+	                $id= $_GET['id_b'];							    
+	                $barna = "select * from barna where Nr_seri=$id ";
+					$r=mysqli_query($lidhja,$barna);
+					$rez=mysqli_fetch_array($r);
+                    $emri = $rez['Emri_b'];
+                    $pershkrim = $rez['Pershkrim'];
+                    $foto = $rez['Foto_b'];
+                    $cmimi = $rez['Cmimi'];
+	?>
                               
                                <div class="clas1">
-                                 <img class="img-responsive" src="menaxher/foto/<?php echo $pro_img1; ?>" alt="produkti 1.1">
-                                   
-								</div> 
+                                 <img class="img-responsive" src="menaxher/foto/<?php echo $foto; ?>" alt="produkti 1.1">
+							   </div> 
+								
                                 <div class="clas2">
- 								   <h4> <?php echo $pro_title; ?> </h4>							
+ 								   <h4> <?php echo $emri; ?> </h4>							
                                    <h5>Pershkrim<p><?php echo $pershkrim; ?> </p></h5>
                                      
-								   <?php } ?>
-                           <form action="ruaj.php?add_cart=<?php echo $id; ?>"  method="post">
+								   
+                           <form action="ruaj.php?id_b=<?php echo $id; ?>"  method="post">
                                <div class="form-group">
-                                   
                                    
                                    <div class="col-md-3">
 								   <label>Sasia
-                                          <select name="sasia" id="" class="form-control">
+                                          <select name="sasia"class="form-control">
                                            <option>1</option>
                                            <option>2</option>
                                            <option>3</option>
@@ -56,10 +51,10 @@
                            </form>
                            
                              </div>
-               
+               <?php } ?>
                <br>
 			   <br>
-			   <br>
+			   <hr>
                <div>
                    <div class="col-sm-9">
 				   <div class="col-md-6">
@@ -68,29 +63,29 @@
                    
                    <?php 
                    
-                    $get_products = "select * from barna LIMIT 2";
+                    $barnat = "select * from barna LIMIT 2";
                              
-                            $run_products = mysqli_query($lidhja,$get_products);
+                            $realizo = mysqli_query($lidhja,$barnat);
                              
-                            while($row_products=mysqli_fetch_array($run_products)){
+                            while($rresht=mysqli_fetch_array($realizo)){
                                 
-                                $pro_id = $row_products['Nr_seri'];
+                                $id = $rresht['Nr_seri'];
         
-                                $pro_title = $row_products['Emri_b'];
+                                $emri = $rresht['Emri_b'];
 
-                                $pershkrim = $row_products['Pershkrim'];
+                                $pershkrim = $rresht['Pershkrim'];
 
-                                $pro_img1 = $row_products['Foto_b'];
-                                $cmimi = $row_products['Cmimi'];
+                                $foto = $rresht['Foto_b'];
+                                $cmimi = $rresht['Cmimi'];
                                 echo "
                                 
                                     <div class='col-md-6 col-sm-6 center-responsive'>
                                     
                                         <div class='product'>
                                         
-                                            <a href='informacione.php?pro_id=$pro_id'>
+                                            <a href='informacione.php?id_b=$id'>
                                             
-                                                <img class='img-responsive' src='menaxher/foto/$pro_img1'>
+                                                <img class='img-responsive' src='menaxher/foto/$foto'>
                                             
                                             </a>
                                             
@@ -98,22 +93,17 @@
                                             
                                                 <h3>
                                                 
-                                                    <a href='informacione.php?pro_id=$pro_id'> $pro_title </a>
+                                                    <a href='informacione.php?id_b=$id'> $emri </a>
                                                 
                                                 </h3>
-                                            
-                                                
                                             
                                             </div>
                                         
                                         </div>
                                     
                                     </div>
-                                
                                 ";
-                       
-                   }
-                   
+                           }
                    ?>
                    
                </div>
@@ -122,12 +112,9 @@
     </div>
    </div>
    </div>
-   <?php 
-    
-    include("teperbashketa/fundi.php");
-								  
+   <?php     
+    include("teperbashketa/fundi.php");								  
     ?>
-    
     
 </body>
 </html>

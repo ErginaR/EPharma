@@ -25,7 +25,23 @@ include("funksione/fux.php");
                <ul class="menu">
                    
                    <li>
-                       <a href="../rregjistrim.php">Rregjistrohu</a>
+                       
+                       
+                        <?php 
+                           
+                           if(isset($_SESSION['email'])){
+                       
+                                echo "<a href='../index.php'> Kryefaqe</a>";
+
+                               }
+						  else{
+
+                                echo " <a href='../rregjistrim.php'>Rregjistrohu </a> ";
+
+                               }
+                           
+                         ?>
+                       
                    </li>
                    <li>
                        <a href="llogaria.php">Llogaria</a>
