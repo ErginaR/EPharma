@@ -1,6 +1,5 @@
 <?php 
     include("teperbashketa/fillimi.php");
-
     if(isset($_SESSION['email'])){
 		
     if(isset($_GET['id_b'])){

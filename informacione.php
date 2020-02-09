@@ -1,8 +1,7 @@
 <?php 
 
     include("teperbashketa/fillimi.php");
-?>
-    
+?>    
     <div id="content">
        <div class="container">                   
     <?php
@@ -10,12 +9,12 @@
 	          if(isset($_GET['id_b'])){							  
 	                $id= $_GET['id_b'];							    
 	                $barna = "select * from barna where Nr_seri=$id ";
-					$r=mysqli_query($lidhja,$barna);
-					$rez=mysqli_fetch_array($r);
-                    $emri = $rez['Emri_b'];
-                    $pershkrim = $rez['Pershkrim'];
-                    $foto = $rez['Foto_b'];
-                    $cmimi = $rez['Cmimi'];
+					$realizo2=mysqli_query($lidhja,$barna);
+					$rresht2=mysqli_fetch_array($realizo2);
+                    $emri = $rresht2['Emri_b'];
+                    $pershkrim = $rresht2['Pershkrim'];
+                    $foto = $rresht2['Foto_b'];
+                    $cmimi = $rresht2['Cmimi'];
 	?>
                               
                                <div class="clas1">

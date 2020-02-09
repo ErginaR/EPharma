@@ -15,11 +15,11 @@
                            
                            if(!isset($_SESSION['email'])){
                                
-                               echo"<a href='checkout.php'>Hyr</a>";
+                               echo"<a href='kontrollo.php'>Hyr</a>";
                                
                            }else{
                                
-                              echo"<a href='farmaciste/llogaria.php?my_orders'>Llogaria</a>"; 
+                              echo"<a href='farmaciste/llogaria.php?HistoriaBlerjes'>Llogaria</a>"; 
                                
                            }
                            

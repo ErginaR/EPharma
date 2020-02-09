@@ -1,55 +1,47 @@
 <h1 align="center"> Ndrysho Fjalekalimin </h1>
-
-
 <form action="" method="post">
     
-    <div><!-- form-group Begin -->
+    <div>
         
-        <label> Fjalekalimi Vjeter: <input type="text" name="old_pass" class="form-control" required></label>
+        <label> Fjalekalimi Vjeter: <input type="text" name="fjalekalim_v" class="form-control" required></label>
       </div>
     
     <div>
         
-        <label> Fjalekalimi i Ri: <input type="text" name="new_pass" class="form-control" required></label>
-        
-    </div><!-- form-group Finish -->
-    
-    <div class="form-group"><!-- form-group Begin -->
-        
-        <label> Konfirmo Fjalekalimin e Ri:<input type="text" name="new_pass_again" class="form-control" required></label>
+        <label> Fjalekalimi i Ri: <input type="text" name="fjalekalim_r" class="form-control" required></label>
         
     </div>
     
-    <div class="text-center"><!-- text-center Begin -->
+    <div class="form-group">
         
-        <button type="submit" name="submit" class="btn btn-primary"><!-- btn btn-primary Begin -->
-            
-            <i class="fa fa-user-md"></i> Update Now
-            
-        </button><!-- btn btn-primary inish -->
+        <label> Konfirmo Fjalekalimin e Ri:<input type="text" name="fjalekalim_r_2" class="form-control" required></label>
         
-    </div><!-- text-center Finish -->
+    </div>
     
-</form><!-- form Finish -->
+    <div class="text-center">       
+        <button type="submit" name="dergo" class="btn btn-primary">Perditeso</button>
+    </div>
+    
+</form>
 <?php 
 
-if(isset($_POST['submit'])){
+if(isset($_POST['dergo'])){
     
-    $c_email = $_SESSION['email'];
+    $email = $_SESSION['email'];
     
-    $c_old_pass = $_POST['old_pass'];
+    $fjalekalim_v = $_POST['fjalekalim_v'];
     
-    $c_new_pass = $_POST['new_pass'];
+    $fjalekalim_r= $_POST['fjalekalim_r'];
     
-    $c_new_pass_again = $_POST['new_pass_again'];
+    $fjalekalim_r_2 = $_POST['fjalekalim_r_2'];
     
-    $sel_c_old_pass = "select * from farmaciste where fjalekalimi='$c_old_pass'";
+    $farmacisti = "select * from farmaciste where fjalekalimi='$fjalekalim_v'";
     
-    $run_c_old_pass = mysqli_query($lidhja,$sel_c_old_pass);
+    $realizo= mysqli_query($lidhja,$farmacisti);
     
-    $check_c_old_pass = mysqli_fetch_array($run_c_old_pass);
+    $rresht= mysqli_fetch_array($realizo);
     
-    if($check_c_old_pass==0){
+    if($rresht==0){
         
         echo "<script>alert('Fjalekalimi i pasakte')</script>";
         
@@ -57,23 +49,19 @@ if(isset($_POST['submit'])){
         
     }
     
-    if($c_new_pass!=$c_new_pass_again){
-        
-        echo "<script>alert('fjalekalimet nuk perputhen')</script>";
-        
-        exit();
-        
-    }
+    if($fjalekalim_r!=$fjalekalim_r_2){       
+        echo "<script>alert('fjalekalimet nuk perputhen')</script>";       
+        exit();        
+    }  
+    $perditeso = "update farmaciste set fjalekalimi='$fjalekalim_r' where Email='$email'";
     
-    $update_c_pass = "update farmaciste set fjalekalimi='$c_new_pass' where Email='$c_email'";
+    $realizo2 = mysqli_query($lidhja,$perditeso);
     
-    $run_c_pass = mysqli_query($lidhja,$update_c_pass);
-    
-    if($run_c_pass){
+    if($realizo2){
         
         echo "<script>alert('Fjalekalimi sapo u modifikua')</script>";
         
-        echo "<script>window.open('llogaria.php?porosia_fr','_self')</script>";
+        echo "<script>window.open('llogaria.php','_self')</script>";
         
     }
     

@@ -19,37 +19,29 @@ include("teperbashketa/db.php");
         
         <ol class="breadcrumb">
             
-            <li class="active"><!-- active Begin -->
-                
-                <i class="fa fa-dashboard"></i> Dashboard / Insert Products
-                
-            </li><!-- active Finish -->
+            <li class="active">Shto Produkte</li>
             
-        </ol><!-- breadcrumb Finish -->
+        </ol>
         
-    </div><!-- col-lg-12 Finish -->
+    </div>
     
-</div><!-- row Finish -->
+</div>
        
-<div class="row"><!-- row Begin -->
+<div class="row">
     
-    <div class="col-lg-12"><!-- col-lg-12 Begin -->
+    <div class="col-lg-12">
         
-        <div class="panel panel-default"><!-- panel panel-default Begin -->
+        <div class="panel panel-default">
             
-           <div class="panel-heading"><!-- panel-heading Begin -->
+           <div class="panel-heading">
                
-               <h3 class="panel-title"><!-- panel-title Begin -->
-                   
-                   <i class="fa fa-money fa-fw"></i> Insert Product 
-                   
-               </h3><!-- panel-title Finish -->
-               
-           </div> <!-- panel-heading Finish -->
+               <h3 class="panel-title">Shto Produkt</h3>
+                 
+           </div> 
            
-           <div class="panel-body"><!-- panel-body Begin -->
+           <div class="panel-body">
                
-               <form method="post" class="form-horizontal" enctype="multipart/form-data">
+               <form method="post" class="form-horizontal">
                    
                     <div>
                       <label> Emri <input name="emri" type="text"  required></label> 
@@ -76,17 +68,17 @@ include("teperbashketa/db.php");
                               
                               <?php 
                               
-                              $get_p_cats = "select * from kategori_barna";
-                              $run_p_cats = mysqli_query($lidhja,$get_p_cats);
+                              $kategorite = "select * from kategori_barna";
+                              $realizo = mysqli_query($lidhja,$kategorite);
                               
-                              while ($row_p_cats=mysqli_fetch_array($run_p_cats)){
+                              while ($rresht=mysqli_fetch_array($realizo)){
                                   
-                                  $p_cat_id = $row_p_cats['Id_kat'];
-                                  $p_cat_title = $row_p_cats['Kategoria'];
+                                  $id = $rresht['Id_kat'];
+                                  $emri = $rresht['Kategoria'];
                                   
                                   echo "
                                   
-                                  <option value='$p_cat_id'> $p_cat_title </option>
+                                  <option value='$id'> $emri </option>
                                   
                                   ";
                                   
@@ -103,29 +95,25 @@ include("teperbashketa/db.php");
                       </div> 
                       <div>
                           
-                          <input name="submit" value="Insert Product" type="submit" class="btn btn-primary form-control">
+                          <input name="dergo" value="Shto" type="submit" class="btn btn-primary form-control">
                           
                       </div>
                  
                    
-               </form><!-- form-horizontal Finish -->
+               </form>
                
-           </div><!-- panel-body Finish -->
+           </div>
             
-        </div><!-- canel panel-default Finish -->
-        
-    </div><!-- col-lg-12 Finish -->
-    
-</div><!-- row Finish -->
-
-
+        </div>       
+    </div>    
+</div>
 </body>
 </html>
 
 
 <?php 
 
-if(isset($_POST['submit'])){
+if(isset($_POST['dergo'])){
     
     $emri = $_POST['emri'];
     $pershkrim = $_POST['pershkrim'];
@@ -135,18 +123,13 @@ if(isset($_POST['submit'])){
     $vendi_p = $_POST['vendi_p'];
     $kategori = $_POST['kategori_b'];
     $cmimi = $_POST['cmimi'];
-    $insert_product = "insert into barna(Emri_b,Pershkrim,Date_P,Date_S,Foto_b,Vendi_P,Id_kat,Cmimi) 
-	                   values ('$emri','$pershkrim',Now(),Now(),'$foto','$vendi_p','$kategori','$cmimi')";
+    $shto_p = "insert into barna(Emri_b,Pershkrim,Date_P,Date_S,Foto_b,Vendi_P,Id_kat,Cmimi) 
+	                   values ('$emri','$pershkrim',Now(),Now(),'$foto','$vendi_p','$kategori','$cmimi')"; 
+    $realizo = mysqli_query($lidhja,$shto_p);
     
-    $run_product = mysqli_query($lidhja,$insert_product);
-    
-    if($run_product){
+    if($realizo){
         
-        echo "<script>alert('Shtimi  i produktit u krye me sukses')</script>";
-       
-        
-    }
-    
+        echo "<script>alert('Shtimi  i produktit u krye me sukses')</script>";  
+    }   
 }
-
 ?>

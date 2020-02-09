@@ -27,23 +27,23 @@
         
         $cel = $rresht['nr_cel'];
         //nepermjet sql aksesoj tabelen e barnave,farmacisteve,te porosive 
-        $get_products = "select * from barna";
+        $barnat= "select * from barna";
         
-        $run_products = mysqli_query($lidhja,$get_products);
+        $realizo = mysqli_query($lidhja,$barnat);
         
-        $nr_barnave = mysqli_num_rows($run_products);
+        $nr_barnave = mysqli_num_rows($realizo);
         
         $klient = "select * from farmaciste";
         
-        $run_customers = mysqli_query($lidhja,$klient);
+        $realizo2 = mysqli_query($lidhja,$klient);
         
-        $count_customers = mysqli_num_rows($run_customers);
+        $nr = mysqli_num_rows($realizo2);
         
-        $get_pending_orders = "select * from porosi";
+        $porosite = "select * from porosi";
         
-        $run_pending_orders = mysqli_query($lidhja,$get_pending_orders);
+        $realizo3 = mysqli_query($lidhja,$porosite);
         
-        $count_pending_orders = mysqli_num_rows($run_pending_orders);
+        $nr_p = mysqli_num_rows($realizo3);
 
 ?>
 
@@ -82,23 +82,7 @@
                         
                         include("fshi_produkt.php");
                         
-                } 
-                        
-                 
-                 /*  if(isset($_GET['insert_box'])){
-                        
-                        include("insert_box.php");
-                        
-                }   if(isset($_GET['view_boxes'])){
-                        
-                        include("view_boxes.php");
-                        
-                }   if(isset($_GET['delete_box'])){
-                        
-                        include("delete_box.php");
-                        
-                } */
-                        
+                }       
                   if(isset($_GET['shiko_klientet'])){
                         
                         include("shiko_klientet.php");
@@ -119,8 +103,7 @@
                         include("profili.php");
                         
                 }  
-                        
-        
+                    
                 ?>
                 
             </div>

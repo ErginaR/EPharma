@@ -2,11 +2,10 @@
 session_start();
 if(!isset($_SESSION['email'])){
     
-    echo "<script>window.open('../checkout.php','_self')</script>";
+    echo "<script>window.open('../kontrollo.php','_self')</script>";
     
 }else{//kllapa mbyllese ne fund te faqes
 include("teperbashketa/db.php");
-include("funksione/fux.php");
 ?>
 <!DOCTYPE html>
 <html>
@@ -14,19 +13,15 @@ include("funksione/fux.php");
     <title>E-Pharma</title>
     <link rel="stylesheet" href="styles/bootstrap-337.min.css">
    <link rel="stylesheet" href="font-awsome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="styles/stili.css">
+    <link rel="stylesheet" href="CSS/stili.css">
 </head>
 <body>
    
    <div id="top">
-        <div> 		
-           
-               
+        <div> 		           
                <ul class="menu">
                    
-                   <li>
-                       
-                       
+                   <li>                    
                         <?php 
                            
                            if(isset($_SESSION['email'])){
@@ -56,7 +51,7 @@ include("funksione/fux.php");
                    
                    if(!isset($_SESSION['email'])){
                        
-                       echo "Guest";
+                       echo "I ftuar";
                        
                    }else{
                        
@@ -75,7 +70,7 @@ include("funksione/fux.php");
                            
                            if(!isset($_SESSION['email'])){
                        
-                                echo "<a href='checkout.php'> Hyr</a>";
+                                echo "<a href='kontrollo.php'> Hyr</a>";
 
                                }else{
 
@@ -127,7 +122,7 @@ include("funksione/fux.php");
                            
                            <input type="text"  placeholder="Kerko" name="kerko" required>
                            
-                           <button type="submit" name="submit" value="Kerkim" class=" btn-primary">Kerko </button>
+                           <button type="submit" name="vendos" value="Kerkim" class=" btn-primary">Kerko </button>
                                
                        </div>
                        
@@ -203,11 +198,7 @@ include("funksione/fux.php");
     include("teperbashketa/fundi.php");
     
     ?>
-    
-    <script src="js/jquery-331.min.js"></script>
-    <script src="js/bootstrap-337.min.js"></script>
-    
-    
+   
 </body>
 </html>
 <?php } ?>

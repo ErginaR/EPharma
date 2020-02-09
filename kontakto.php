@@ -1,25 +1,8 @@
 <?php 
-
     include("teperbashketa/fillimi.php");
-
 ?>  
-     
- 
    <div id="content">
        <div class="container">
-           <div class="col-md-12">
-               
-               <ul class="breadcrumb">
-                   <li>
-                       <a href="index.php">Kryefaqe</a>
-                   </li>
-                   <li>
-                       Na kontaktoni
-                   </li>
-               </ul>
-               
-           </div>
-           
            <div class="col-md-3">
    
    <?php 
@@ -78,12 +61,8 @@
                            
                            <div class="text-center">
                                
-                               <button type="submit" name="submit" class="btn btn-primary">
-                               
-                               <i class="fa fa-user-md"></i>Dergo
-                               
-                               </button>
-                               
+                               <button type="submit" name="submit" class="btn btn-primary">Dergo</button>
+                            
                            </div>
                            
                        </form>
@@ -102,10 +81,5 @@
     include("teperbashketa/fundi.php");
     
     ?>
-    
-    <script src="js/jquery-331.min.js"></script>
-    <script src="js/bootstrap-337.min.js"></script>
-    
-    
 </body>
 </html>

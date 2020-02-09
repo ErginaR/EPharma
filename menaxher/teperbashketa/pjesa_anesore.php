@@ -1,5 +1,4 @@
-<?php 
-    
+<?php  
     if(!isset($_SESSION['email'])){
         
         echo "<script>window.open('hyr.php','_self')</script>";
@@ -42,15 +41,6 @@
             <li>
                 <a href="dil.php">Dil </a>
             </li>
-          
-         <!--shtim konferncash   
-              
-                    <li>
-                        <a href="index.php?insert_konf"> Shto Konferenca </a>
-                    </li>
-                    <li>
-                        <a href="index.php?view_konf"> Shiko</a>
-                    </li> -->
            
         </ul>
     </div>

@@ -7,62 +7,39 @@
        <div class="container">
 	   
            <?php
-           if(isset($_GET['submit'])){
+           if(isset($_GET['vendos'])){
 		      $kerko=$_GET['kerko'];
-              $get_products = "select * from barna where Emri_b='$kerko'";
-                             
-              $run = mysqli_query($lidhja,$get_products);
-							
-             $count=mysqli_num_rows($run);
+              $barna_zgj = "select * from barna where Emri_b='$kerko'";                           
+              $realizo = mysqli_query($lidhja,$barna_zgj);							
+              $nr=mysqli_num_rows($realizo);
         
-        if($count==0){
-            
-            
-            echo "
-            
-                <div class='box'>
-                
-                    <h1>Nuk ka te dhena</h1>
-                
-                </div>
-            
-            ";
-            
-        }else{
-            
-            echo "
-            
-                <div class='box'>
-                
-                    <h1> $count te dhena u gjenden </h1>
-                    
-                
-                </div>
-            
-            ";
-            
+        if($nr==0){                       
+            echo "<div class='box'><h1>Nuk ka te dhena</h1></div>";                  
+        }
+		else{            
+            echo "<div class='box'><h1> $nr te dhena u gjenden </h1></div>"; 
         }
         
-        while($row_products=mysqli_fetch_array($run)){
+        while($rresht=mysqli_fetch_array($realizo)){
             
-                                $pro_id = $row_products['Nr_seri'];
+                                $id = $rresht['Nr_seri'];
         
-                                $pro_title = $row_products['Emri_b'];
+                                $emri = $rresht['Emri_b'];
 
-                                $pershkrim = $row_products['Pershkrim'];
+                                $pershkrim = $rresht['Pershkrim'];
 
-                                $pro_img1 = $row_products['Foto_b'];
+                                $foto_b = $rresht['Foto_b'];
 								
-                                $cmimi = $row_products['Cmimi'];
+                                $cmimi = $rresht['Cmimi'];
                                 echo "
                                 
                                     <div class='col-md-4 col-sm-6 center-responsive'>
                                     
                                         <div class='product'>
                                         
-                                            <a href='informacione.php?pro_id=$pro_id'>
+                                            <a href='informacione.php?id_b=$id'>
                                             
-                                                <img class='img-responsive' src='menaxher/foto/$pro_img1'>
+                                                <img class='img-responsive' src='menaxher/foto/$foto_b'>
                                             
                                             </a>
                                             
@@ -70,7 +47,7 @@
                                             
                                                 <h3>
                                                 
-                                                    <a href='informacione.php?pro_id=$pro_id'> $pro_title </a>
+                                                    <a href='informacione.php?id_b=$id'> $emri </a>
                                                 
                                                 </h3>
                                             
@@ -82,31 +59,19 @@
 
                                                 <p class='buttons'>
 
-                                                    <a class='btn btn-default' href='informacione.php?pro_id=$pro_id'>
-
-                                                        Informacion
-
-                                                    </a>
-
-                                                    <a class='btn btn-primary' href='informacione.php?pro_id=$pro_id'>
-
-                                                        <i class='fa fa-shopping-cart'></i> shto ne shporte
-
-                                                    </a>
-
+                                                    <a class='btn btn-default' href='informacione.php?id_b=$id'>Informacion</a>
+                                                    <a class='btn btn-primary' href='informacione.php?id_b=$id'> shto ne shporte</a>
                                                 </p>
                                             
                                             </div>
                                         
                                         </div>
                                     
-                                    </div>
-                                
-                                ";
-            
-        }
+                                    </div>";
+         
+              }
         
-    }
+           }
                    ?>
                
 							

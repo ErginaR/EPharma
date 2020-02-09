@@ -1,6 +1,5 @@
 <?php 
     include("teperbashketa/fillimi.php");
-
 ?>   
    <div id="content">
        <div class="container">
@@ -38,5 +37,3 @@
     include("teperbashketa/fundi.php");
     
     ?>
-</body>
-</html>

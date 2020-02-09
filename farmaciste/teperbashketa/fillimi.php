@@ -2,64 +2,21 @@
 
 session_start();
 require("teperbashketa/db.php");
-include("funksione/fux.php");
 
 ?>
-<?php 
-
-if(isset($_GET['Nr_seri'])){
-    
-    $id = $_GET['Nr_seri'];
-    $q = "select * from barna where Nr_seri='$id' ";
-    
-    $rezultat = mysqli_query($lidhja,$q);
-    
-    $rresht = mysqli_fetch_array($rezultat);
-    
-	$emertimi = $rresht['Emri_b'];
-    
-    $pershkrimi = $rresht['Pershkrim'];
-    
-    $date_p = $rresht['Date_P'];
-    
-    $date_s = $rresht['Date_S'];
-    
-    $foto_p = $rresht['Foto_p'];
-    
-    $vendi= $row_product['Vendi_P'];
-	
-	$Id_kat = $rresht['Id_kat'];
-	
-    $cmim = $rresht['Cmimi'];
-	
-    $q2 = "select * from kategori_barna where Id_kat=$Id_kat' ";
-    
-    $rezultat2 = mysqli_query($lidhja,$q2);
-    
-    $rresht2 = mysqli_fetch_array($rezultat2);
-    
-    $kategori = $rresht2['Kategoria'];
-    
-}
-?>
-
 <!DOCTYPE html>
 <html>
 <head>
-    <title>E-Pharma</title>
+    <title>E-Farma</title>
     <link rel="stylesheet" href="styles/bootstrap-337.min.css">
-	<link rel="stylesheet" href="styles/stili.css">
+	<link rel="stylesheet" href="CSS/stili.css">
 </head>
 <body>
    
    <div id="top">
-           <div >
-               
-               <ul class="menu">
-                   
-                   <li>
-                       
-                       
+           <div >              
+               <ul class="menu">                  
+                   <li>                    
                         <?php 
                            
                            if(isset($_SESSION['email'])){
@@ -89,7 +46,7 @@ if(isset($_GET['Nr_seri'])){
                    
                    if(!isset($_SESSION['email'])){
                        
-                       echo "Guest";
+                       echo "I ftuar";
                        
                    }else{
                        
@@ -159,7 +116,7 @@ if(isset($_GET['Nr_seri'])){
                            
                            <input type="text"  placeholder="Kerko" name="kerko" required>
                            
-                           <button type="submit" name="submit" value="Kerkim" class=" btn-primary">Kerko </button>
+                           <button type="submit" name="vendos" value="Kerkim" class=" btn-primary">Kerko </button>
                                
                        </div>
                        

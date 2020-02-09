@@ -2,22 +2,21 @@
 
 $email = $_SESSION['email'];
 
-$q4 = "select * from farmaciste where Email='$email'";
+$farmacisti = "select * from farmaciste where Email='$email'";
 
-$rez = mysqli_query($lidhja,$q4);
+$rez = mysqli_query($lidhja,$farmacisti);
 
 $rresht = mysqli_fetch_array($rez);
 
-$customer_id = $row_customer['id_farmacistit'];
+$id = $rresht['id_farmacistit'];
 
-$customer_name = $row_customer['Emri'];
+$emri = $rresht['Emri'];
 
-$customer_email = $row_customer['Email'];
+$email = $rresht['Email'];
 
-$customer_city = $row_customer['Qyteti'];
+$qyteti = $rresht['Qyteti'];
 
-
-$customer_address = $row_customer['Adresa'];
+$adresa = $rresht['Adresa'];
 
 
 ?>
@@ -27,53 +26,50 @@ $customer_address = $row_customer['Adresa'];
 <form action="" method="post">
     
     <div>
-        <label> Emri:<input type="text" name="c_name"  value="<?php echo $customer_name; ?>" required> </label>
+        <label> Emri:<input type="text" name="emri"  value="<?php echo $emri; ?>" required> </label>
     </div>  
    
     <div>
-        <label>Email:<input type="text" name="c_email" value="<?php echo $customer_email; ?>" required></label>
+        <label>Email:<input type="text" name="email" value="<?php echo $email; ?>" required></label>
      </div>   
 	 
     <div>
-        <label>Qyteti: <input type="text" name="c_city"value="<?php echo $customer_city; ?>" required></label>
+        <label>Qyteti: <input type="text" name="qytet"value="<?php echo $qyteti; ?>" required></label>
      </div>   
 
     <div>
-        <label>Adresa:<input type="text" name="c_address" value="<?php echo $customer_address; ?>" required> </label>
+        <label>Adresa:<input type="text" name="adrese" value="<?php echo $adresa; ?>" required> </label>
     </div> 
     
     <div>
         
-        <button name="update" class="btn btn-primary">Modifiko</button>
+        <button name="modifiko" class="btn btn-primary">Modifiko</button>
     </div>        
 </form>            
 
 <?php 
 
-if(isset($_POST['update'])){
+if(isset($_POST['modifiko'])){
     
-    $update_id = $customer_id;
+    $id_m = $id;
     
-    $c_name = $_POST['c_name'];
+    $emri_f= $_POST['emri'];
     
-    $c_email = $_POST['c_email'];
-    
-    
-    $c_city = $_POST['c_city'];
-    
-    $c_address = $_POST['c_address'];
+    $email_f = $_POST['email'];
     
     
-    $update_customer = "update farmaciste set Emri='$c_name',Email='$c_email',Qyteti='$c_city',Adresa='$c_address'where id_farmacistit='$update_id' ";
+    $qytet_f = $_POST['qytet'];
     
-    $run_customer = mysqli_query($lidhja,$update_customer);
+    $adresa_f = $_POST['adrese'];
+       
+    $perditesim = "update farmaciste set Emri='$emri_f',Email='$email_f',Qyteti='$qytet_f',Adresa='$adresa_f'where id_farmacistit='$id_m' ";
     
-    if($run_customer){
+    $realizim = mysqli_query($lidhja,$perditesim);
+    
+    if($realizim){
         
         echo "<script>alert('Modifikimi u realizua me sukses')</script>";
         
-    }
-    
+    }   
 }
-
 ?>

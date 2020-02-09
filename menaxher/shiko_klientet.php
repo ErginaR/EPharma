@@ -2,7 +2,7 @@
     
     if(!isset($_SESSION['email'])){
         
-        echo "<script>window.open('login.php','_self')</script>";
+        echo "<script>window.open('hyr.php','_self')</script>";
         
     }else{
 
@@ -10,91 +10,86 @@
 
 <h1>Shiko klientet</h1>
 
-<div class="row"><!-- row 2 begin -->
-    <div class="col-lg-12"><!-- col-lg-12 begin -->
-        <div class="panel panel-default"><!-- panel panel-default begin -->
-            
-            
-            <div class="panel-body"><!-- panel-body begin -->
-                <div class="table-responsive"><!-- table-responsive begin -->
-                    <table class="table table-striped table-bordered table-hover"><!-- table table-striped table-bordered table-hover begin -->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">         
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered table-hover">
                         
-                        <thead><!-- thead begin -->
-                            <tr><!-- tr begin -->
+                        <thead>
+                            <tr>
                                 <th> Nr: </th>
-                                <th> Name: </th>
+                                <th> Emri: </th>
                            
                                 <th> E-Mail: </th>
-                                <th> Country: </th>
-                                <th> City: </th>
-                                <th> Address: </th>
-                                <th> Contact: </th>
-                                <th> Delete: </th>
-                            </tr><!-- tr finish -->
-                        </thead><!-- thead finish -->
+                                <th> Qyteti: </th>
+                                <th>Shteti:  </th>
+                                <th> Adresa: </th>
+                                <th> Kodi Postar: </th>
+                                <th> Fshi: </th>
+                            </tr>
+                        </thead>
                         
-                        <tbody><!-- tbody begin -->
+                        <tbody>
                             
                             <?php 
           
                                 $i=0;
                             
-                                $get_c = "select * from farmaciste";
+                                $farmacistet = "select * from farmaciste";
                                 
-                                $run_c = mysqli_query($lidhja,$get_c);
+                                $realizo = mysqli_query($lidhja,$farmacistet);
           
-                                while($row_c=mysqli_fetch_array($run_c)){
+                                while($rresht=mysqli_fetch_array($realizo)){
                                     
-                                    $c_id = $row_c['id_farmacistit'];
+                                    $id = $rresht['id_farmacistit'];
                                     
-                                    $c_name = $row_c['Emri'];
+                                    $emri = $rresht['Emri'];
                                     
+                                    $email = $rresht['Email'];
                                     
+                                    $qytet= $rresht['Qyteti'];
                                     
-                                    $c_email = $row_c['Email'];
+                                    $shtet = $rresht['Shteti'];
                                     
-                                    $c_country = $row_c['Qyteti'];
+                                    $adresa = $rresht['Adresa'];
                                     
-                                    $c_city = $row_c['Shteti'];
-                                    
-                                    $c_address = $row_c['Adresa'];
-                                    
-                                    $c_contact = $row_c['Kodi_postar'];
+                                    $kodi_p = $rresht['Kodi_postar'];
                                     
                                     $i++;
                             
                             ?>
                             
-                            <tr><!-- tr begin -->
+                            <tr>
                                 <td> <?php echo $i; ?> </td>
-                                <td> <?php echo $c_name; ?> </td>
+                                <td> <?php echo $emri; ?> </td>
                                 
-                                <td> <?php echo $c_email; ?> </td>
-                                <td> <?php echo $c_country; ?></td>
-                                <td> <?php echo $c_city; ?> </td>
-                                <td> <?php echo $c_address ?> </td>
-                                <td> <?php echo $c_contact ?> </td>
+                                <td> <?php echo $email; ?> </td>
+                                <td> <?php echo $qytet; ?></td>
+                                <td> <?php echo $shtet; ?> </td>
+                                <td> <?php echo $adresa ?> </td>
+                                <td> <?php echo $kodi_p ?> </td>
                                 <td> 
                                      
-                                     <a href="index.php?delete_customer=<?php echo $c_id; ?>">
-                                     
-                                        <i class="fa fa-trash-o"></i> Delete
+                                     <a href="index.php?fshi_klient=<?php echo $id; ?>">
+                                      Fshi
                                     
                                      </a> 
                                      
                                 </td>
-                            </tr><!-- tr finish -->
+                            </tr>
                             
                             <?php } ?>
                             
-                        </tbody><!-- tbody finish -->
+                        </tbody>
                         
-                    </table><!-- table table-striped table-bordered table-hover finish -->
-                </div><!-- table-responsive finish -->
-            </div><!-- panel-body finish -->
+                    </table>
+                </div>
+            </div>
             
-        </div><!-- panel panel-default finish -->
-    </div><!-- col-lg-12 finish -->
-</div><!-- row 2 finish -->
+        </div>
+    </div>
+</div>
 
 <?php } ?>

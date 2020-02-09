@@ -12,13 +12,13 @@
 
     if(isset($_GET['fshi_klient'])){
         
-        $delete_id = $_GET['fshi_klient'];
+        $id = $_GET['fshi_klient'];
         
-        $delete_c = "delete from farmaciste where id_farmacistit='$delete_id'";
+        $fshije = "delete from farmaciste where id_farmacistit='$id'";
         
-        $run_delete = mysqli_query($lidhja,$delete_c);
+        $realizo = mysqli_query($lidhja,$fshije);
         
-        if($run_delete){
+        if($realizo){
             
             echo "<script>alert('Klienti sapo u fshi')</script>";
             

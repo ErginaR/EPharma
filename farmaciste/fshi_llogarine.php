@@ -1,22 +1,20 @@
 <?php 
 
-$customer_session = $_SESSION['email'];
+$email = $_SESSION['email'];
 
-$get_customer = "select * from farmaciste where Email='$customer_session'";
+$farmacisti = "select * from farmaciste where Email='$email'";
 
-$run_customer = mysqli_query($lidhja,$get_customer);
+$realizo= mysqli_query($lidhja,$farmacisti);
 
-$row_customer = mysqli_fetch_array($run_customer);
+$rresht = mysqli_fetch_array($realizo);
 
-$customer_id = $row_customer['id_farmacistit'];
+$id = $rresht['id_farmacistit'];
 
-$customer_name = $row_customer['Emri'];
+$emri = $rresht['Emri'];
 
-$customer_email = $row_customer['Email'];
+$qytet = $rresht['Qyteti'];
 
-$customer_city = $row_customer['Qyteti'];
-
-$customer_address = $row_customer['Adresa'];
+$adresa= $rresht['Adresa'];
 
 ?>
     <h1> Fshi llogarine</h1>
@@ -24,19 +22,19 @@ $customer_address = $row_customer['Adresa'];
     <form action="" method="post">
     
     <div>
-        <label> Emri: <?php echo $customer_name; ?></label>
+        <label> Emri: <?php echo $emri; ?></label>
     </div>  
    
     <div>
-        <label>Email:<?php echo $customer_email; ?></label>
+        <label>Email:<?php echo $email; ?></label>
      </div>   
 	 
     <div>
-        <label>Qyteti: <?php echo $customer_city; ?></label>
+        <label>Qyteti: <?php echo $qytet; ?></label>
      </div>   
 
     <div>
-        <label>Adresa:<?php echo $customer_address; ?> </label>
+        <label>Adresa:<?php echo $adresa; ?> </label>
     </div>
 	
        <input type="submit" name="fshi" value="Fshi" class="btn btn-danger"> 
@@ -50,18 +48,17 @@ $email = $_SESSION['email'];
 
 if(isset($_POST['fshi'])){
     
-    $delete_customer = "delete from farmaciste where Email='$email'";
+    $fshije = "delete from farmaciste where Email='$email'";
     
-    $run_delete_customer = mysqli_query($lidhja,$delete_customer);
+    $realizoje = mysqli_query($lidhja,$fshije);
     
-    if($run_delete_customer){
+    if($realizoje){
         
         session_destroy();
         
         echo "<script>alert('Tashme llogaria juaj nuk ekziston me')</script>";
         
-        echo "<script>window.open('../index.php','_self')</script>";
-        
+        echo "<script>window.open('../index.php','_self')</script>";      
     }
     
 }

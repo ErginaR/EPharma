@@ -9,17 +9,16 @@
                     <li><a href="shporte.php">Shporta</a></li>
                     <li><a href="kontakto.php">Na Kontaktoni</a></li>
                     <li><a href="produkte.php">Produkte</a></li>
-                    <li><a href="farmaciste/llogaria.php">Llogaria</a></li>
                     <li>                    
 					<?php 
                            
                            if(!isset($_SESSION['email'])){
                                
-                               echo"<a href='checkout.php'>Hyr</a>";
+                               echo"<a href='kontrollo.php'>Hyr</a>";
                                
                            }else{
                                
-                              echo"<a href='farmaciste/llogaria.php?my_orders'>Llogaria</a>"; 
+                              echo"<a href='farmaciste/llogaria.php?HistoriaBlerjes'>Llogaria</a>"; 
                                
                            }
                            

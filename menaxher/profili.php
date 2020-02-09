@@ -14,21 +14,21 @@
         
         $email = $_SESSION['email'];
         
-        $get_user = "select * from menaxher where email='$email'";
+        $menaxheri = "select * from menaxher where email='$email'";
         
-        $run_user = mysqli_query($lidhja,$get_user);
+        $realizo = mysqli_query($lidhja,$menaxheri);
         
-        $row_user = mysqli_fetch_array($run_user);
+        $rresht = mysqli_fetch_array($realizo);
         
-        $user_id = $row_user['id'];
+        $id = $rresht['id'];
         
-        $user_name = $row_user['emri'];
+        $emri = $rresht['emri'];
         
-        $user_pass = $row_user['fjalekalimi'];
+        $fjalekalim = $rresht['fjalekalimi'];
         
-        $user_country = $row_user['qyteti'];
+        $qyteti = $rresht['qyteti'];
         
-        $user_contact = $row_user['nr_cel'];
+        $nr_cel = $rresht['nr_cel'];
         
         
     }
@@ -37,21 +37,18 @@
     
 <h3>Modifiko Profilin</h3>
        
-<div class="row"><!-- row Begin -->
+<div class="row">
     
-    <div class="col-lg-12"><!-- col-lg-12 Begin -->
+    <div class="col-lg-12">
         
-        <div class="panel panel-default"><!-- panel panel-default Begin -->
-            
-           
-           
-           <div class="panel-body"><!-- panel-body Begin -->
+        <div class="panel panel-default">
+           <div class="panel-body">
                
                <form method="post">
                    
                    <div>
                        
-                      <label >Emri <input value="<?php echo $user_name; ?>" name="emri" type="text" required></label> 
+                      <label >Emri <input value="<?php echo $emri; ?>" name="emri" type="text" required></label> 
                      
                    </div>
                    
@@ -65,19 +62,19 @@
                    
                    <div>
                        
-                      <label> Fjalekalimi <input value="<?php echo $user_pass; ?>"  name="fjalekalimi" type="text"  required></label> 
+                      <label> Fjalekalimi <input value="<?php echo $fjalekalim; ?>"  name="fjalekalimi" type="text"  required></label> 
                       
                    </div>
                    
                    <div>
                        
-                      <label> Qyteti <input value="<?php echo $user_country; ?>"  name="qyteti" type="text" required> </label> 
+                      <label> Qyteti <input value="<?php echo $qyteti; ?>"  name="qyteti" type="text" required> </label> 
                      
                    </div>
                    
                    <div>
                        
-                      <label> Nr Cel<input value="<?php echo $user_contact; ?>"  name="nr_cel" type="text"required> </label> 
+                      <label> Nr Cel<input value="<?php echo $nr_cel; ?>"  name="nr_cel" type="text"required> </label> 
                       
                       
                    <div>
@@ -95,22 +92,20 @@
     </div>
     
 </div>
-
-
 <?php 
 
 if(isset($_POST['submit'])){
     
-    $user_name = $_POST['emri'];
-    $user_email = $_POST['email'];
-    $user_pass = $_POST['fjalekalimi'];
-    $user_country = $_POST['qyteti'];
-    $user_contact = $_POST['nr_cel'];
+    $emri_m = $_POST['emri'];
+    $email_m = $_POST['email'];
+    $fjalekalim_m = $_POST['fjalekalimi'];
+    $qytet_m = $_POST['qyteti'];
+    $nr_cel_m = $_POST['nr_cel'];
     
-    $update_user = "update menaxher set emri='$user_name',email='$user_email',fjalekalimi='$user_pass',qyteti='$user_country',nr_cel='$user_contact'";
-    $run_user = mysqli_query($lidhja,$update_user);
+    $modifiko = "update menaxher set emri='$emri_m',email='$email_m',fjalekalimi='$fjalekalim_m',qyteti='$qytet_m',nr_cel='$nr_cel_m'";
+    $realizoje = mysqli_query($lidhja,$modifiko);
     
-    if($run_user){
+    if($realizoje){
         
         echo "<script>alert('Modifikimi u realizua me sukses')</script>";
         echo "<script>window.open('hyr.php','_self')</script>";

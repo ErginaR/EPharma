@@ -1,7 +1,5 @@
 <?php 
-
     include("teperbashketa/fillimi.php");
-
 ?>    
        
    <div id="content">
@@ -24,7 +22,7 @@
                    <div class="box-header">
                        <h2> Rregjistrohu </h2>
                       
-                       <form action="rregjistrim.php" method="post" enctype="multipart/form-data" >
+                       <form action="rregjistrim.php" method="post">
                            
                            <div class="form-group">
                                

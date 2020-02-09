@@ -1,5 +1,4 @@
-<div class="box">
-   
+<div class="box">  
    <?php 
     
     $email = $_SESSION['email'];
@@ -12,9 +11,7 @@
     
     $id = $rresht['id_farmacistit'];
     
-    ?>
-    
-    
+    ?>   
      <p class="lead text-center">
          <form action="porosi.php" method="get" >
 		    <h1>Konfirmo adresen</h1>
@@ -25,8 +22,7 @@
                           <input type="text" class="form-control" name="adrese" required>
                            
                        </div>
-		  <table class="table">
-                               
+		    <table class="table">                              
                                <thead>
                                    
                                    <tr>
@@ -34,7 +30,7 @@
                                        <th >Produkte</th>
                                        <th>Sasi</th>
                                        <th>Cmimi</th>
-                                       <th >Totali</th>
+                                       <th>Totali</th>
                                        
                                    </tr>
                                    
@@ -74,11 +70,9 @@
                         <?php
                     }
                 ?>
-                               
-                              
-                               
+                  
                            </table>
-         <input type="submit"value="submit"> </input>
+         <input type="submit" value="realizo"> </input>
          </form>
      </p>
       

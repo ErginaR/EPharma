@@ -1,21 +1,11 @@
-<center>
-    
-    <h1> Porosite </h1>
-    
-    <p class="text-muted">
-        
-        Historia juaj e blerjeve
-        
-    </p>
-    
+<center>   
+    <h1> Porosite </h1>   
+    <p class="text-muted">       
+        Historia juaj e blerjeve       
+    </p>   
 </center>
-
-
 <hr>
-
-
-<div class="table-responsive">
-    
+<div class="table-responsive">  
     <table class="table table-bordered table-hover">
         
         <thead>
@@ -35,41 +25,35 @@
         </thead>
         
         <tbody>
-            <?php 
-            
+            <?php             
             $email = $_SESSION['email'];
             
-            $get_customer = "select * from farmaciste where Email='$email'";
-            $run_customer = mysqli_query($lidhja,$get_customer);
-            $row_customer = mysqli_fetch_array($run_customer);
-            $customer_id = $row_customer['id_farmacistit'];
+            $farmacisti = "select * from farmaciste where Email='$email'";
+            $realizo = mysqli_query($lidhja,$farmacisti);
+            $rresht = mysqli_fetch_array($realizo);
+            $id = $rresht['id_farmacistit'];
             
-            $get_orders = "select * from porosi where Id_klientit='$customer_id'";//gjej te gjitha porosite e realizuara nga klienti
-            $run_orders = mysqli_query($lidhja,$get_orders);
-			$nr=mysqli_num_rows($run_orders);
+            $porosite_f = "select * from porosi where Id_klientit='$id'";//gjej te gjitha porosite e realizuara nga klienti
+            $realizo2 = mysqli_query($lidhja,$porosite_f);
+			$nr=mysqli_num_rows($realizo2);
 			if($nr>0){
             $i = 0;
             
-            while($row_orders = mysqli_fetch_array($run_orders)){
+            while($rresht2 = mysqli_fetch_array($realizo2)){
                 
-                $order_id = $row_orders['Id_porosi'];
-				$d_p= $row_orders['DatePorosi'];
-                $q7="select * from rreshtporosi where id_p=$order_id";
-				$r7=mysqli_query($lidhja,$q7);
-				$rr=mysqli_fetch_array($r7);
-                $cmim = $rr['Cmimi'];
-                $sasi = $rr['sasia'];
-				$id_b=$rr['nr_seri'];
-                $q6="select * from barna where Nr_seri=$id_b";
-				$r6=mysqli_query($lidhja,$q6);
-				$rr2=mysqli_fetch_array($r6);
-                $emri=$rr2['Emri_b']; 
-                //$order_date = substr($row_orders['data_porosi'],0,11);
-               
-                
-                $i++;
-                
-            
+                $id_pr = $rresht2['Id_porosi'];
+				$d_p= $rresht2['DatePorosi'];
+                $rreshtp="select * from rreshtporosi where id_p=$id_pr";
+				$realizo3=mysqli_query($lidhja,$rreshtp);
+				$rresht3=mysqli_fetch_array($realizo3);
+                $cmim = $rresht3['Cmimi'];
+                $sasi = $rresht3['sasia'];
+				$id_b=$rresht3['nr_seri'];
+                $barnaa="select * from barna where Nr_seri=$id_b";
+				$realizo4=mysqli_query($lidhja,$barnaa);
+				$rresht4=mysqli_fetch_array($realizo4);
+                $emri=$rresht4['Emri_b']; 
+                $i++;                           
             ?>
             
             <tr>

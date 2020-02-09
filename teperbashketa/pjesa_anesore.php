@@ -1,9 +1,5 @@
 <?php 
-
-
 require("teperbashketa/db.php");
-
-
 ?>
 <div style="background-color:#D6F6F4;">
     <div style="background-color:#2CB29B;">
@@ -15,9 +11,9 @@ require("teperbashketa/db.php");
             
             <?php 
 			   
-               $q2 = "select * from kategori_barna";
+               $kategorite = "select * from kategori_barna";
     
-               $rezultat2 = mysqli_query($lidhja,$q2);
+               $rezultat2 = mysqli_query($lidhja,$kategorite);
     
                while($rresht2=mysqli_fetch_array($rezultat2)){
         

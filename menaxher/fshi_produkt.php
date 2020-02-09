@@ -12,13 +12,13 @@
 
     if(isset($_GET['fshi_produkt'])){
         
-        $delete_id = $_GET['fshi_produkt'];
+        $id = $_GET['fshi_produkt'];
         
-        $delete_pro = "delete from barna where Nr_seri='$delete_id'";
+        $fshije = "delete from barna where Nr_seri='$id'";
         
-        $run_delete = mysqli_query($lidhja,$delete_pro);
+        $realizo = mysqli_query($lidhja,$fshije);
         
-        if($run_delete){
+        if($realizo){
             
             echo "<script>alert('Barna sapo u fshi')</script>";
             

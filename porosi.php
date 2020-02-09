@@ -5,9 +5,9 @@ include("teperbashketa/db.php");
     if(isset($_SESSION['email'])){
 		if(isset($_GET['adrese'])){
 		$email=$_SESSION['email'];
-		$q1="select * from farmaciste where Email='$email'";
-		$r1=mysqli_query($lidhja,$q1);
-		$rresht1=mysqli_fetch_array($r1);
+		$farma="select * from farmaciste where Email='$email'";
+		$realizo1=mysqli_query($lidhja,$farma);
+		$rresht1=mysqli_fetch_array($realizo1);
 		$id_f=$rresht1['id_farmacistit'];
 		$ad=$_GET['adrese'];//modifikoje adresen
 		$q4="update farmaciste set Adresa='$ad' where id_farmacistit='$id_f'";
@@ -19,9 +19,9 @@ include("teperbashketa/db.php");
 							$id=$vlere['id'];
 							$sasia=$vlere['sasi'];
 							$barna = "select * from barna where Nr_seri='$id' ";
-                             $r=mysqli_query($lidhja,$barna);          
-                             $rr=mysqli_fetch_array($r); 
-							 $nr=mysqli_num_rows($r);
+                             $realizo2=mysqli_query($lidhja,$barna);          
+                             $rr=mysqli_fetch_array($realizo2); 
+							 $nr=mysqli_num_rows($realizo2);
                              if($nr==1)	{
 								$emri= $rr['Emri_b'];
 								$cmimi=$rr['Cmimi'];

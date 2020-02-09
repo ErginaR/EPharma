@@ -1,8 +1,5 @@
-
 <?php 
-
     include("teperbashketa/fillimi.php");
-
 ?>
    <div id="content">
        <div class="container">          
@@ -33,18 +30,18 @@
                                
                                <tbody>
                                   
-                         <?php $total = 0;
-						       $total2 = 0;
+                         <?php $total = 0;//totali i gjithe produkteve
+						       $total2 = 0;//totali i produkteve duke perfshire transportin
 							   $sasi_t=0;
                         if(!empty($_SESSION["shporte"])){
                            
                         foreach ($_SESSION["shporte"] as $celes => $vlere) {
 							$id=$vlere['id'];
 							$sasi_t+=$vlere["sasi"];
-							$q1= "select * from barna where Nr_seri='$id' ";
-                             $r=mysqli_query($lidhja,$q1);          
-                             $rr=mysqli_fetch_array($r); 
-							 $nr=mysqli_num_rows($r);
+							$barnat= "select * from barna where Nr_seri='$id' ";
+                             $realizo=mysqli_query($lidhja,$barnat);          
+                             $rr=mysqli_fetch_array($realizo); 
+							 $nr=mysqli_num_rows($realizo);
                              if($nr==1)	{
 								$emri= $rr['Emri_b'];
 								$cmimi=$rr['Cmimi'];
